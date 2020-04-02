@@ -1,0 +1,26 @@
+
+###
+
+GET http://localhost:3004/api/users
+
+###
+
+GET http://localhost:3004/api/users/2
+
+###
+
+DELETE http://localhost:3004/api/users/2
+
+###
+
+POST http://localhost:3004/api/users
+Content-Type: application/json
+
+{
+"name": "testi",
+"realname": "nimi",
+"password": "abc",
+"type": "admin"
+}
+
+###
