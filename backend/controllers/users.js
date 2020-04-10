@@ -44,13 +44,13 @@ const createRouter = (pool) => {
   });
 
   router.post('/', async (request, response, next) => {
-    const { name, realname, password, type } = request.body;
+    const { username, realname, password, type } = request.body;
 
     try {
       await pool
         .query(
           'INSERT INTO users (username, realname, passwordHash, type) VALUES ($1, $2, $3, $4)',
-          [name, realname, password, type]
+          [username, realname, password, type]
         );
 
       response.status(201).send('User created');
