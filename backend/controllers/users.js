@@ -46,6 +46,23 @@ const createRouter = (pool) => {
   router.post('/', async (request, response, next) => {
     const { username, realname, password, type } = request.body;
 
+    if (!password) {
+      return response.status(400).json({ error: 'Password is required.' });
+    }
+    if (password.length < 8) {
+      return response.status(400).json({ error: 'Password length should be at least 8 characters long.' });
+    }
+    if (password.length < 16 && !/[0-9]+/.test(password)) {
+      return response.status(400).json({
+        error: 'Password shorter than 16 characters should contain at least one digit.'
+      });
+    }
+    if (password.length < 16 && !/[a-z]+/.test(password)) {
+      return response.status(400).json({
+        error: 'Password shorter than 16 characters should contain at least one lowercase letter.'
+      });
+    }
+
     try {
       await pool
         .query(
