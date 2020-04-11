@@ -29,6 +29,24 @@ describe('When there is initially one user in the database', () => {
   test('user with incorrect password cannot log in.', async () => {
     await api.post({ ...initialUser, password: 'incorrect pass' }).expect(401);
   });
+
+  test('missing username should yield a proper error message', async () => {
+    const res1 = await api.post({ ...initialUser, username: undefined }).expect(400);
+    const res2 = await api.post({ ...initialUser, username: '' }).expect(400);
+    const res3 = await api.post({ ...initialUser, username: '                   ' }).expect(400);
+    expect(res1.body.error).toMatch(/username missing/i);
+    expect(res2.body.error).toMatch(/username missing/i);
+    expect(res3.body.error).toMatch(/username missing/i);
+  });
+
+  test('missing password should yield a proper error message', async () => {
+    const res1 = await api.post({ ...initialUser, password: undefined }).expect(400);
+    const res2 = await api.post({ ...initialUser, password: '' }).expect(400);
+    const res3 = await api.post({ ...initialUser, password: '                   ' }).expect(400);
+    expect(res1.body.error).toMatch(/password missing/i);
+    expect(res2.body.error).toMatch(/password missing/i);
+    expect(res3.body.error).toMatch(/password missing/i);
+  });
 });
 
 afterAll(async () => {
