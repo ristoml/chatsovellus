@@ -13,12 +13,14 @@ const pool = new Pool({
   port: 5432
 });
 
-const userRouter = require('./controllers/users')(pool);
+const userRouter  = require('./controllers/users')(pool);
+const loginRouter = require('./controllers/login')(pool);
 
 app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/api/users', userRouter);
+app.use('/api/login', loginRouter);
 
 if (process.env.NODE_ENV === 'development') {
   const testRouter = require('./controllers/tests')(pool);
