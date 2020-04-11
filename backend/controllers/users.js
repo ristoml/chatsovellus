@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const bcrypt = require('bcrypt');
 
 const createRouter = (pool) => {
   router.get('/', async (request, response, next) => {
@@ -112,11 +113,14 @@ const createRouter = (pool) => {
       });
     }
 
+    const saltRounds = 10;
+    const hash = await bcrypt.hash(passTrimmed, saltRounds);
+
     try {
       await pool
         .query(
           'INSERT INTO users (username, realname, passwordHash, type) VALUES ($1, $2, $3, $4)',
-          [username, realname, password, type]
+          [username, realname, hash, type]
         );
 
       response.status(201).send('User created');
