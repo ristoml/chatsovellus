@@ -30,6 +30,11 @@ describe('When there is initially one user in the database', () => {
     await api.post({ ...initialUser, password: 'incorrect pass' }).expect(401);
   });
 
+  test('if user does not exist, expect 404', async () => {
+    const res = await api.post({ username: 'doesnotexist', password: 'gwjoegwjoiegw223' }).expect(404);
+    expect(res.body.error).toMatch(/user does not exist/i);
+  });
+
   test('missing username should yield a proper error message', async () => {
     const res1 = await api.post({ ...initialUser, username: undefined }).expect(400);
     const res2 = await api.post({ ...initialUser, username: '' }).expect(400);
