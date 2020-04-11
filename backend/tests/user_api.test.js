@@ -80,8 +80,8 @@ describe('When there is initially one user in the database', () => {
 
     expect(res1.body.error).toMatch(/password is required/i);
     expect(res2.body.error).toMatch(/password length should be at least 8 characters long/i);
-    expect(res3.body.error).toMatch(/password shorter than 16 characters should containt at least one digit/i);
-    expect(res4.body.error).toMatch(/password shorter than 16 characters should containt at least one lowercase letter/i);
+    expect(res3.body.error).toMatch(/password shorter than 16 characters should contain at least one digit/i);
+    expect(res4.body.error).toMatch(/password shorter than 16 characters should contain at least one lowercase letter/i);
   });
 });
 
