@@ -49,17 +49,66 @@ const createRouter = (pool) => {
     if (!password) {
       return response.status(400).json({ error: 'Password is required.' });
     }
-    if (password.length < 8) {
+    if (!username) {
+      return response.status(400).json({ error: 'Username is required.' });
+    }
+    if (!realname) {
+      return response.status(400).json({ error: 'Real name is required.' });
+    }
+    if (!type) {
+      return response.status(400).json({ error: 'User type is required.' });
+    }
+
+    const passTrimmed = password.trim();
+    const usernameTrimmed = username.trim();
+    const realnameTrimmed = realname.trim();
+    const typeTrimmed = type.trim();
+
+    if (passTrimmed.length === 0) {
+      return response.status(400).json({ error: 'Password is required.' });
+    }
+    if (usernameTrimmed.length === 0) {
+      return response.status(400).json({
+        error: 'Username is required.'
+      });
+    }
+    if (realnameTrimmed.length === 0) {
+      return response.status(400).json({
+        error: 'Real name is required.'
+      });
+    }
+    if (typeTrimmed.length === 0) {
+      return response.status(400).json({
+        error: 'User type is required.'
+      });
+    }
+
+    if (!['admin', 'user'].includes(typeTrimmed)) {
+      return response.status(400).json({
+        error: 'Not a proper user type.'
+      });
+    }
+    if (passTrimmed.length < 8) {
       return response.status(400).json({ error: 'Password length should be at least 8 characters long.' });
     }
-    if (password.length < 16 && !/[0-9]+/.test(password)) {
+    if (passTrimmed.length < 16 && !/[0-9]+/.test(passTrimmed)) {
       return response.status(400).json({
         error: 'Password shorter than 16 characters should contain at least one digit.'
       });
     }
-    if (password.length < 16 && !/[a-z]+/.test(password)) {
+    if (passTrimmed.length < 16 && !/[a-z]+/.test(passTrimmed)) {
       return response.status(400).json({
         error: 'Password shorter than 16 characters should contain at least one lowercase letter.'
+      });
+    }
+    if (usernameTrimmed.length < 5) {
+      return response.status(400).json({
+        error: 'Username should be at least 5 characters long.'
+      });
+    }
+    if (realnameTrimmed.length < 5) {
+      return response.status(400).json({
+        error: 'Real name should be at least 5 characters long.'
       });
     }
 
