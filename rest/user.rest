@@ -9,6 +9,18 @@ GET http://localhost:3004/api/users/2
 
 ###
 
+GET http://localhost:3004/api/tests/users
+
+###
+
+POST http://localhost:3004/api/tests/resetusers
+
+###
+
+DELETE http://localhost:3004/api/users/2
+
+###
+
 DELETE http://localhost:3004/api/users/2
 
 ###
@@ -17,9 +29,9 @@ POST http://localhost:3004/api/users
 Content-Type: application/json
 
 {
-"name": "testi",
-"realname": "nimi",
-"password": "abc",
+"username": "testiefwj",
+"realname": "nimiwdaji",
+"password": "abcdefg123",
 "type": "admin"
 }
 
