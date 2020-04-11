@@ -22,12 +22,13 @@ beforeAll(async () => {
 
 describe('When there is initially one user in the database', () => {
   test('user with correct password can log in.', async () => {
-    const response = await api.post(initialUser).expect(200);
-    expect(response.body.token).toBeDefined();
+    const res = await api.post(initialUser).expect(200);
+    expect(res.body.token).toBeDefined();
   });
 
   test('user with incorrect password cannot log in.', async () => {
-    await api.post({ ...initialUser, password: 'incorrect pass' }).expect(401);
+    const res = await api.post({ ...initialUser, password: 'incorrect pass' }).expect(401);
+    expect(res.body.error).toMatch(/incorrect password/i);
   });
 
   test('if user does not exist, expect 404', async () => {
