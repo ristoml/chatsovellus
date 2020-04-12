@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const middleware = require('./utils/middleware');
 const app = express();
 
 const userRouter  = require('./controllers/users');
@@ -8,6 +9,7 @@ const loginRouter = require('./controllers/login');
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(middleware.logger());
 
 app.use('/api/users', userRouter);
 app.use('/api/login', loginRouter);
