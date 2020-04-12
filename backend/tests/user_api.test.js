@@ -15,14 +15,6 @@ const initialUserWithoutPass = {
   type: 'admin'
 };
 
-beforeAll(() => {
-  if (process.env.NODE_ENV !== 'development') {
-    throw new Error(
-      `NODE_ENV should be set to 'development'. It is currently set to ${process.env.NODE_ENV}.`
-    );
-  }
-});
-
 describe('When there is initially one user in the database', () => {
   beforeEach(async () => {
     await api.post('/api/tests/resetusers');

@@ -12,7 +12,7 @@ if (nodeEnv === 'production') {
   DB_PASSWORD = process.env.DB_PASSWORD;
 }
 
-if (nodeEnv === 'development') {
+if (nodeEnv === 'development' || nodeEnv === 'test') {
   DB_NAME = process.env.DEV_DB_NAME;
   DB_PASSWORD = process.env.DEV_DB_PASSWORD;
 }

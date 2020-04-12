@@ -7,8 +7,8 @@
     "scripts": {
         "start": "NODE_ENV=production node index.js",
         "watch": "NODE_ENV=development nodemon index.js",
-        "test": "cross-env NODE_ENV=development jest --verbose --runInBand",
-        "test:openhandles": "cross-env NODE_ENV=development jest --verbose --runInBand --detectOpenHandles"
+        "test": "cross-env jest --verbose --runInBand",
+        "test:openhandles": "cross-env jest --verbose --runInBand --detectOpenHandles"
     },
     "author": "",
     "license": "MIT",

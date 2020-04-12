@@ -11,12 +11,6 @@ const initialUser = {
 };
 
 beforeAll(async () => {
-  if (process.env.NODE_ENV !== 'development') {
-    throw new Error(
-      `NODE_ENV should be set to 'development'. It is currently set to ${process.env.NODE_ENV}.`
-    );
-  }
-  
   await api.post('/api/tests/resetusers');
   await api.post('/api/tests/addtestuser');
 });
