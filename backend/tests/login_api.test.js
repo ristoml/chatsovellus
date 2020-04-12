@@ -29,6 +29,7 @@ describe('When there is initially one user in the database', () => {
 
   test('user with incorrect password cannot log in.', async () => {
     const res = await api.post('/api/login').send({ ...initialUser, password: 'incorrect pass' }).expect(401);
+    expect(res.body.token).not.toBeDefined();
     expect(res.body.error).toMatch(/incorrect password/i);
   });
 
