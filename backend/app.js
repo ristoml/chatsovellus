@@ -14,7 +14,7 @@ app.use(middleware.logger());
 app.use('/api/users', userRouter);
 app.use('/api/login', loginRouter);
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
   const testRouter = require('./controllers/tests');
   app.use('/api/tests', testRouter);
 }
