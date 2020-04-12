@@ -60,34 +60,24 @@ router.post('/', async (request, response, next) => {
     return response.status(400).json({ error: 'User type is required.' });
   }
 
-  const passTrimmed = password.trim();
-  const usernameTrimmed = username.trim();
-  const realnameTrimmed = realname.trim();
-  const typeTrimmed = type.trim();
+  const [ passTrimmed, usernameTrimmed, realnameTrimmed, typeTrimmed ] =
+    [ password.trim(), username.trim(), realname.trim(), type.trim() ];
 
   if (passTrimmed.length === 0) {
     return response.status(400).json({ error: 'Password is required.' });
   }
   if (usernameTrimmed.length === 0) {
-    return response.status(400).json({
-      error: 'Username is required.'
-    });
+    return response.status(400).json({ error: 'Username is required.' });
   }
   if (realnameTrimmed.length === 0) {
-    return response.status(400).json({
-      error: 'Real name is required.'
-    });
+    return response.status(400).json({ error: 'Real name is required.' });
   }
   if (typeTrimmed.length === 0) {
-    return response.status(400).json({
-      error: 'User type is required.'
-    });
+    return response.status(400).json({ error: 'User type is required.' });
   }
 
   if (!['admin', 'user'].includes(typeTrimmed)) {
-    return response.status(400).json({
-      error: 'Not a proper user type.'
-    });
+    return response.status(400).json({ error: 'Not a proper user type.' });
   }
   if (passTrimmed.length < 8) {
     return response.status(400).json({ error: 'Password length should be at least 8 characters long.' });
