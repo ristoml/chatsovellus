@@ -1,6 +1,7 @@
 const supertest = require('supertest');
-const { app, pool } = require('../app');
+const app = require('../app');
 const api = supertest(app);
+const db = require('../db');
 
 const initialUser = {
   username: 'root',
@@ -56,5 +57,5 @@ describe('When there is initially one user in the database', () => {
 });
 
 afterAll(async () => {
-  await pool.end();
+  await db.close();
 });

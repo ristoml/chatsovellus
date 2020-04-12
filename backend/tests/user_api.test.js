@@ -1,6 +1,7 @@
 const supertest = require('supertest');
-const { app, pool } = require('../app');
+const app = require('../app');
 const api = supertest(app);
+const db = require('../db');
 
 const userWithoutPass = {
   username: 'testuser',
@@ -51,7 +52,7 @@ describe('When there is initially one user in the database', () => {
       realname: 'Kalevi',
       type: 'user',
       password: 'abcd123!',
-    }
+    };
 
     await api.post('/api/users').send(userOfTypeUser).expect(201);
 
@@ -173,7 +174,7 @@ describe('When there is initially one user in the database', () => {
 
 
 afterAll(async () => {
-  await pool.end();
+  await db.close();
 });
 
 
