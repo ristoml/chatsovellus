@@ -1,3 +1,6 @@
+/** 
+ * Creates a connection pool using node-postgres and provides methods for communicating with the database.
+ * @module db */
 const config = require('../utils/config');
 
 const Pool = require('pg').Pool;
@@ -9,15 +12,29 @@ const pool = new Pool({
   port: 5432
 });
 
-console.log('Pool created. User: ', config.DB_USER, ' DB: ',config.DB_NAME);
+console.log('Pool created. User:', config.DB_USER, ' DB:',config.DB_NAME);
 
-module.exports = {
-  query: async (text, params) => {
-    const result = await pool.query(text, params);
-    return result;
-  },
-  close: async () => {
-    await pool.end();
-  }
+/**
+ * Execute an SQL-query.
+ * @param text - SQL-query
+ * @param params - An array of strings inserted to the query.
+ * @example
+ * db.query('SELECT * FROM table WHERE id = $1', [id])
+ * @returns Results of the query as a row of Javascript-objects.
+ */
+const query = async (text, params) => {
+  const result = await pool.query(text, params);
+  return result;
 };
+
+/**
+ * Closes the pool.
+ * @example
+ * db.close()
+ */
+const close = async () => {
+  await pool.end();
+};
+
+module.exports = { query, close };
 

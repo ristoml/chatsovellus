@@ -1,5 +1,12 @@
+/** 
+ * 
+ * @module utils/middleware */
 const morgan = require('morgan');
 
+/**
+ * Creates a logger using morgan.
+ * @returns A logger for express application
+ */
 const logger = () => {
   const minimal =
     ':method :url :status :res[content-length] - :response-time ms';

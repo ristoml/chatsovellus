@@ -1,10 +1,25 @@
+/** 
+ * Uses dotenv to configure environment variables, and provides them.
+ * @module utils/config */
 require('dotenv').config();
 const nodeEnv = process.env.NODE_ENV;
 
+/**
+ * Port the server listens to.
+ */
 let PORT = process.env.PORT;
 
+/**
+ * PostgreSQL username
+ */
 let DB_USER = process.env.DB_USER;
+/**
+ * PostgreSQL database name
+ */
 let DB_NAME;
+/**
+ * PostgreSQL password
+ */
 let DB_PASSWORD;
 
 if (nodeEnv === 'production') {
