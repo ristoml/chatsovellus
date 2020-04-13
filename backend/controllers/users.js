@@ -1,7 +1,18 @@
-const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const db = require('../db');
+const db     = require('../db');
+const router = require('express').Router();
 
+/**
+ * @swagger
+ * /api/users:
+ *  get:
+ *    summary: Get all users
+ *    tags: [Users]
+ *    description: Request all users from the server.
+ *    responses:
+ *      '200':
+ *        description: All users as an array of javascript objects
+ */
 router.get('/', async (request, response, next) => {
   try {
     const query = await db.query('SELECT * FROM users ORDER BY id ASC');
@@ -23,6 +34,26 @@ router.get('/', async (request, response, next) => {
   }
 });
 
+/**
+ * @swagger
+ * path:
+ *  /api/users/{userId}:
+ *    get:
+ *      summary: Get a user by id
+ *      tags: [Users]
+ *      parameters:
+ *        - in: path
+ *          name: userId
+ *          schema:
+ *            type: integer
+ *          required: true
+ *          description: Id of the user
+ *      responses:
+ *        "200":
+ *          description: User as an object
+ *        "404":
+ *          description: User not found.
+ */
 router.get('/:id', async (request, response, next) => {
   const id = request.params.id;
   try {
@@ -44,6 +75,40 @@ router.get('/:id', async (request, response, next) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/users:
+ *   post:
+ *     summary: Post a new user to the database.
+ *     description: Post a new user to the database. All fields are required.
+ *     tags: [Users]
+ *     parameters:
+ *      - in: body
+ *        name: user
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                username:
+ *                  type: string
+ *                realname:
+ *                  type: string
+ *                password:
+ *                  type: string
+ *                type:
+ *                  type: string
+ *        example:   # Sample object
+ *          username: mattivirtanen
+ *          realname: Matti Virtanen
+ *          password: salasana123
+ *          type: admin
+ *     responses:
+ *       '201':
+ *         description: User succesfully created.
+ *       '400':
+ *         description: Any required field missing.
+ */
 router.post('/', async (request, response, next) => {
   const { username, realname, password, type } = request.body;
 

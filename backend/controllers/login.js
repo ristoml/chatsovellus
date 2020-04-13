@@ -1,8 +1,40 @@
-const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const db = require('../db');
+const db     = require('../db');
+const jwt    = require('jsonwebtoken');
+const router = require('express').Router();
 
+/**
+ * @swagger
+ * /api/login:
+ *   post:
+ *     summary: Log in
+ *     description: Responds with a json web token, if authentication is successful. All fields required.
+ *     tags: [Login]
+ *     parameters:
+ *      - in: body
+ *        name: credentials
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                username:
+ *                  type: string
+ *                password:
+ *                  type: string
+ *        example:
+ *          username: mattivirtanen
+ *          password: salasana123
+ *     responses:
+ *       '200':
+ *         description: Successful login
+ *       '400':
+ *         description: Any required field missing.
+ *       '401':
+ *         description: Unauthorized access. Incorrect password.
+ *       '404':
+ *         description: User does not exist
+ */
 router.post('/', async (request, response, next) => {
   const { username, password } = request.body;
 
