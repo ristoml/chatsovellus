@@ -1,6 +1,6 @@
-const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const db = require('../db');
+const db     = require('../db');
+const router = require('express').Router();
 
 router.post('/resetusers', async (_request, response) => {
   db.query('DELETE FROM users');
