@@ -18,9 +18,9 @@ const init = (server) => {
     });
 
     socket.on('disconnect', () => {
-      io.emit('user-list', Object.keys(sockets));
       console.log(`socket ${socket.id} disconnected`);
       delete sockets[socket.id];
+      io.emit('user-list', Object.keys(sockets));
     });
   });
 };
