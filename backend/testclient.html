@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>test</title>
+</head>
+<body>
+  <p>Messages:</p>
+  <li id="messages"></li>
+
+  <form>
+    <input id="message">
+    <button id="send-button">
+      Send
+    </button>
+  </form>
+
+  <p id="msg">Not connected</p>
+
+  <p>Sockets (by id)</p>
+  <ul id="sockets"></ul>
+
+</body>
+<script src="./node_modules/socket.io-client/dist/socket.io.js"></script>
+<script>
+  const messages = document.getElementById('messages')
+  const sockets  = document.getElementById('sockets')
+  const sendBtn  = document.getElementById('send-button')
+  const p = document.getElementById('msg')
+
+  const socket = io.connect('http://localhost:3004');
+  p.innerText = 'Connected'
+  socket.emit('new-user')
+
+  sendBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    const input = document.getElementById('message')
+    const msg = input.value
+
+    socket.emit('new-message', msg)
+
+    const li = document.createElement('li')
+    li.innerText = 'you sent: ' + msg
+    messages.appendChild(li)
+  })
+
+  socket.on('new-message', (message) => {
+    const li = document.createElement('li')
+    li.innerText = message
+    messages.appendChild(li)
+  });
+
+  socket.on('user-list', (users) => {
+    while (sockets.lastChild) {
+      sockets.removeChild(sockets.lastChild)
+    } 
+
+    users.forEach(u => {
+      const li = document.createElement('li')
+      li.innerText = u
+      sockets.appendChild(li)
+    })
+  })
+</script>
+
+</html>
+
