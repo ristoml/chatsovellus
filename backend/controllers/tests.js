@@ -53,15 +53,16 @@ router.post('/addsometestusers', async (_request, response, next) => {
   ];
 
   const promiseArray = users.map((u) => {
-    const saltRounds = 10;
+    const addUserPromise = async () => {
+      const saltRounds = 10;
+      const hash = await bcrypt.hash(u.password, saltRounds);
+      await db.query(
+        'INSERT INTO users (username, realname, passwordhash, type) VALUES ($1, $2, $3, $4)',
+        [u.username, u.realname, hash, u.type]
+      );
+    };
 
-    return bcrypt.hash(u.password, saltRounds)
-      .then((hash) => {
-        db.query(
-          'INSERT INTO users (username, realname, passwordhash, type) VALUES ($1, $2, $3, $4)',
-          [u.username, u.realname, hash, u.type]
-        );
-      });
+    return addUserPromise();
   });
 
   try {
