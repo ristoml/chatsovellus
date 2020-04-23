@@ -162,11 +162,66 @@ describe('When there is initially one user in the database', () => {
     expect(res2.body.error).toMatch(/user type is required/i);
     expect(res3.body.error).toMatch(/not a proper user type/i);
   });
+
 });
 
+describe('When there are a few users in the database', () => {
+  const adminUser = {
+    username: 'user1',
+    realname: 'user1',
+    password: 'testpass1',
+    type: 'admin'
+  };
+
+  const nonAdmin = {
+    username: 'user4',
+    realname: 'user4',
+    password: 'testpass4',
+    type: 'user'
+  };
+
+  beforeEach(async () => {
+    await api.post('/api/tests/resetusers');
+    await api.post('/api/tests/addsometestusers');
+  });
+
+  test('user\'s of type admin can delete a user\'s from the database', async () => {
+    const login = await api.post('/api/login').send(adminUser).expect(200);
+    const { token } = login.body;
+
+    const userToDelete = {
+      userToDelete: nonAdmin.username,
+      token
+    };
+
+    await api.delete('/api/users').send(userToDelete).expect(204);
+  });
+
+  test('user\'s of type \'user\' cannot delete a user from the database', async () => {
+    const login = await api.post('/api/login').send(nonAdmin).expect(200);
+    const { token } = login.body;
+
+    const userToDelete = {
+      userToDelete: adminUser.username,
+      token
+    };
+
+    const res = await api.delete('/api/users').send(userToDelete).expect(401);
+    expect(res.body.error).toMatch(/user does not have permission to delete other users from the database/i);
+  });
+
+  test('cannot delete a user with an invalid token', async () => {
+    const userToDelete = {
+      userToDelete: nonAdmin.username,
+      token: 'grejojigeor'
+    };
+
+    const res = await api.delete('/api/users').send(userToDelete).expect(401);
+    expect(res.body.error).toMatch(/invalid token/i);
+  });
+});
 
 afterAll(async () => {
   await db.close();
 });
-
 
