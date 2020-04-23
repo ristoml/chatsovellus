@@ -20,12 +20,12 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-const userRouter  = require('./controllers/users');
-const loginRouter = require('./controllers/login');
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(middleware.logger());
+
+const userRouter  = require('./controllers/users');
+const loginRouter = require('./controllers/login');
 
 app.use('/api/users', userRouter);
 app.use('/api/login', loginRouter);
@@ -34,6 +34,8 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
   const testRouter = require('./controllers/tests');
   app.use('/api/tests', testRouter);
 }
+
+app.use(middleware.errorHandler);
 
 module.exports = app;
 
