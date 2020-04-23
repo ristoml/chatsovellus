@@ -70,8 +70,8 @@ router.post('/', async (request, response, next) => {
       return response.status(401).json({ error: 'Incorrect password.' });
     }
 
-    const userForToken = { username: usernameTrimmed, type: user.type };
-    const token = jwt.sign(userForToken, process.env.SECRET);
+    const payload = { username: usernameTrimmed, type: user.type };
+    const token = jwt.sign(payload, process.env.SECRET);
 
     response.status(200).send({ username: user.username, token });
   } catch (except) {
