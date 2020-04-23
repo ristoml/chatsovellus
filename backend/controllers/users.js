@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const db     = require('../db');
+const jwt    = require('jsonwebtoken');
 const router = require('express').Router();
 
 /**
@@ -184,12 +185,22 @@ router.post('/', async (request, response, next) => {
   }
 });
 
-router.delete('/:id', async (request, response, next) => {
-  try {
-    const id = parseInt(request.params.id);
-    await db.query('DELETE FROM users WHERE id = $1', [id]);
+router.delete('/', async (request, response, next) => {
+  const { userToDelete, token } = request.body;
 
-    response.status(200).send(`User with ${id} deleted.`);
+  try {
+    const decodedToken = await jwt.verify(token, process.env.SECRET);
+
+    if (!decodedToken.username || !decodedToken.type) {
+      return response.status(401).json({ error: 'invalid token' });
+    }
+
+    if (decodedToken.type !== 'admin') {
+      return response.status(401).json({ error: 'User does not have permission to delete other users from the database.' });
+    }
+
+    await db.query('DELETE FROM users WHERE username = $1', [userToDelete]);
+    response.status(204).end();
   } catch (except) {
     next(except);
   }
