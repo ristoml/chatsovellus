@@ -186,7 +186,8 @@ router.post('/', async (request, response, next) => {
 });
 
 router.delete('/', async (request, response, next) => {
-  const { userToDelete, token } = request.body;
+  const { userToDelete } = request.body;
+  const token = request.token;
 
   try {
     const decodedToken = await jwt.verify(token, process.env.SECRET);

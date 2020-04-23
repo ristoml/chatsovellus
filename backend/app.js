@@ -22,6 +22,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(middleware.tokenExtractor);
 app.use(middleware.logger());
 
 const userRouter  = require('./controllers/users');

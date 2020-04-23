@@ -191,10 +191,13 @@ describe('When there are a few users in the database', () => {
 
     const userToDelete = {
       userToDelete: nonAdmin.username,
-      token
     };
 
-    await api.delete('/api/users').send(userToDelete).expect(204);
+    await api
+      .delete('/api/users')
+      .send(userToDelete)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(204);
   });
 
   test('user\'s of type \'user\' cannot delete a user from the database', async () => {
@@ -203,20 +206,30 @@ describe('When there are a few users in the database', () => {
 
     const userToDelete = {
       userToDelete: adminUser.username,
-      token
     };
 
-    const res = await api.delete('/api/users').send(userToDelete).expect(401);
+    const res =
+      await api
+        .delete('/api/users')
+        .send(userToDelete)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(401);
+
     expect(res.body.error).toMatch(/user does not have permission to delete other users from the database/i);
   });
 
   test('cannot delete a user with an invalid token', async () => {
     const userToDelete = {
       userToDelete: nonAdmin.username,
-      token: 'grejojigeor'
     };
 
-    const res = await api.delete('/api/users').send(userToDelete).expect(401);
+    const res =
+      await api
+        .delete('/api/users')
+        .send(userToDelete)
+        .set('Authorization', 'Bearer malformedtoken')
+        .expect(401);
+
     expect(res.body.error).toMatch(/invalid token/i);
   });
 });
