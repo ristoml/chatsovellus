@@ -1,10 +1,9 @@
-const app          = require('express')();
-const bodyParser   = require('body-parser');
-const config       = require('./utils/config');
-const cors         = require('cors');
-const middleware   = require('./utils/middleware');
-const swaggerDocs  = require('./swagger.json');
-const swaggerUi    = require('swagger-ui-express');
+const app         = require('express')();
+const bodyParser  = require('body-parser');
+const cors        = require('cors');
+const middleware  = require('./utils/middleware');
+const swaggerDocs = require('../swagger.json');
+const swaggerUi   = require('swagger-ui-express');
 
 app.use(cors());
 app.use(bodyParser.json());

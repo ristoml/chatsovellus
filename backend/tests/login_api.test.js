@@ -1,7 +1,7 @@
 const supertest = require('supertest');
-const app = require('../app');
+const app = require('../src/app');
 const api = supertest(app);
-const db = require('../db');
+const db = require('../src/db');
 
 const initialUser = {
   username: 'root',
