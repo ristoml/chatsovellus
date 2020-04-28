@@ -21,7 +21,7 @@ const init = (server) => {
         Object.values(sockets)
           .map((v) => v.username);
 
-      io.emit('user-list', Object.keys(users));
+      io.emit('user-list', users);
     });
 
     socket.on('new-message', (message) => {
