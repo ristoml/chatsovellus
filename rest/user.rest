@@ -40,6 +40,7 @@ Content-Type: application/json
 }
 
 ###
+<<<<<<< HEAD
 
 POST http://localhost:3004/api/login
 Content-Type: application/json
@@ -68,3 +69,5 @@ Content-Type: application/json
 "userToDelete": "testiefwj",
 }
 
+=======
+>>>>>>> front-r
