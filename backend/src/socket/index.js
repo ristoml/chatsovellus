@@ -48,6 +48,8 @@ const init = (server) => {
       io.emit('user-list', users);
     });
   });
+
+  return io;
 };
 
 module.exports = init;
