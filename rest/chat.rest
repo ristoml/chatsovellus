@@ -1,0 +1,56 @@
+
+###
+
+GET http://localhost:3004/api/chat
+
+###
+
+GET http://localhost:3004/api/users
+
+###
+
+POST http://localhost:3004/api/tests/resetusers
+
+###
+
+POST http://localhost:3004/api/tests/addsometestusers
+
+###
+
+POST http://localhost:3004/api/chat
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mjc4NiwidXNlcm5hbWUiOiJ1c2VyMiIsInR5cGUiOiJhZG1pbiIsImlhdCI6MTU4ODE3NDk5MH0.ItmL5iG2DAFQgzPlltdKc3VI5xHfa3J598QKvqlEgGI 
+Content-Type: application/json
+
+{
+"message": "testiefwj"
+}
+
+###
+
+POST http://localhost:3004/api/login
+Content-Type: application/json
+
+{
+"username": "user2",
+"password": "testpass2"
+}
+
+###
+
+DELETE http://localhost:3004/api/users/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJ0eXBlIjoiYWRtaW4iLCJpYXQiOjE1ODc2MTQxMzJ9.PRsnyxCpTxuquosSRObmsF2yQXUDOEhcWTgDzBW5Ppg
+Content-Type: application/json
+
+{
+"userToDelete": "testiefwj"
+}
+
+###
+
+DELETE http://localhost:3004/api/users/
+Content-Type: application/json
+
+{
+"userToDelete": "testiefwj",
+}
+

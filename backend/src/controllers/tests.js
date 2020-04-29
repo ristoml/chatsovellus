@@ -2,7 +2,13 @@ const bcrypt = require('bcrypt');
 const db     = require('../db');
 const router = require('express').Router();
 
-router.post('/resetusers', async (_request, response) => {
+router.get('/allmessages', async (_request, response) => {
+  const res = await db.query('DELETE * messages');
+  response.status(200).json(res.body);
+});
+
+router.post('/reset', async (_request, response) => {
+  await db.query('DELETE FROM messages');
   await db.query('DELETE FROM users');
   response.status(204).end();
 });

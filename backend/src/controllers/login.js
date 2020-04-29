@@ -26,7 +26,7 @@ router.post('/', async (request, response, next) => {
   try {
     const query =
         await db
-          .query('SELECT username, passwordhash, type FROM users WHERE username = $1', [usernameTrimmed]);
+          .query('SELECT id, username, passwordhash, type FROM users WHERE username = $1', [usernameTrimmed]);
 
     if (query.rows.length === 0) {
       return response.status(404).json({ error: 'User does not exist.' });
@@ -38,10 +38,14 @@ router.post('/', async (request, response, next) => {
       return response.status(401).json({ error: 'Incorrect password.' });
     }
 
-    const payload = { username: usernameTrimmed, type: user.type };
+    const payload = { id: user.id, username: usernameTrimmed, type: user.type };
     const token = jwt.sign(payload, process.env.SECRET);
 
-    response.status(200).send({ username: user.username, token });
+    response.status(200).send({
+      id: user.id,
+      username: user.username,
+      token
+    });
   } catch (except) {
     next(except);
   }

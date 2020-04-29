@@ -11,7 +11,7 @@ const initialUser = {
 };
 
 beforeAll(async () => {
-  await api.post('/api/tests/resetusers');
+  await api.post('/api/tests/reset');
   await api.post('/api/tests/addtestuser');
 });
 

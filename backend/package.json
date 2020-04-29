@@ -9,7 +9,8 @@
         "watch": "NODE_ENV=development nodemon src/index.js",
         "test": "cross-env jest --verbose --runInBand",
         "test:openhandles": "cross-env jest --verbose --runInBand --detectOpenHandles",
-        "jsdoc": "jsdoc -t node_modules/minami -c ./.jsdoc.json ."
+        "jsdoc": "jsdoc -t node_modules/minami -c ./.jsdoc.json .",
+        "lint": "eslint --ext .js ./src"
     },
     "author": "",
     "license": "MIT",
@@ -19,6 +20,7 @@
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "jsonwebtoken": "^8.5.1",
+        "lodash": "^4.17.15",
         "morgan": "^1.10.0",
         "pg": "^8.0.0",
         "socket.io": "^2.3.0"
@@ -30,6 +32,7 @@
         "jsdoc": "^3.6.4",
         "minami": "^1.2.3",
         "nodemon": "^2.0.2",
+        "socket.io-client": "^2.3.0",
         "supertest": "^4.0.2",
         "swagger-ui-express": "^4.1.4"
     },
