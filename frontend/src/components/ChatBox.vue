@@ -25,11 +25,12 @@ export default {
     async sendMessage(){        
       if(this.message){
         let message = {
-            username : this.$store.getters.getUser,
+            id : this.$store.getters.getUser.id,
+            username : this.$store.getters.getUser.username,
             message : this.message
           }
          console.log(message) 
-        let response = await this.$socket.emit('new-message', message);
+        let response = await this.$socket.emit('newMessage', message);
         this.message = "";
       }
     },

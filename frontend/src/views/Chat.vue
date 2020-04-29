@@ -2,7 +2,7 @@
   <v-app id="app" class="fill-height">
     <v-layout row class="fill-height" style="padding-bottom:60px" >
         <v-flex md8 offset-md2 style="overflow:auto;" class="pr-3 pl-3" v-if="HANDLE" ref="chatContainer">
-          <div v-for="chat in CHATS" class="mt-4 mb-4" style="max-width:80%" :key="chat">
+          <div v-for="chat in CHATS" class="mt-4 mb-4" style="max-width:80%" :key="chat.handle"  >
               <app-chat-item :chat="chat"></app-chat-item>
           </div>
         </v-flex>       
@@ -50,7 +50,11 @@ export default {
     },
     chat : function(val){
       this.$store.dispatch("ADD_CHAT",val);
-    }
+    },
+    userList : function(response) {
+      console.log(response)
+    }    
+
   },
   data() {
     return {
@@ -79,6 +83,9 @@ export default {
             if (name) {
               this.$socket.emit('join', name);
             }
+        },
+        joined: function () {
+            this.$set('join', true)
         },
         
   },

@@ -40,6 +40,9 @@ export default new Vuex.Store({
         },
         RESET: state => {
             Object.assign(state, getDefaultState());
+        },
+        SET_CHAT: (state, payload) => {
+            state.chats = payload;
         }
     },
     actions: {
@@ -51,7 +54,7 @@ export default new Vuex.Store({
             commit('RESET', '');
         },
         SET_CHAT: async(context, payload) => {
-            let { data } = await Axios.get('http://localhost:3004/chat');
+            let { data } = await Axios.get('/api/chat/');
             console.log(data);
             context.commit("SET_CHAT", data);
         },

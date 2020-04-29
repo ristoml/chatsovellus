@@ -10,7 +10,6 @@
        <span>{{chat.created | moment("HH:MM, DD-MM-YY")}}</span>
     </v-tooltip>
 </template>
-
 <script>
 export default {
   props : ['chat'],
