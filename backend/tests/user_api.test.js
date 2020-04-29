@@ -9,15 +9,9 @@ const userWithoutPass = {
   type: 'user'
 };
 
-const initialUserWithoutPass = {
-  username: 'root',
-  realname: 'root',
-  type: 'admin'
-};
-
 describe('When there is initially one user in the database', () => {
   beforeEach(async () => {
-    await api.post('/api/tests/resetusers');
+    await api.post('/api/tests/reset');
     await api.post('/api/tests/addtestuser');
   });
 
