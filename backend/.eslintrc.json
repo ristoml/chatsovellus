@@ -51,6 +51,9 @@
         "array-callback-return": ["error", { "allowImplicit": true }],
         "comma-spacing": ["error", { "before": false, "after": true }],
         "curly": "error",
-        "dot-notation": "error"
+        "dot-notation": "error",
+        "key-spacing": ["error", {  "afterColon": true, "beforeColon": false }],
+        "space-before-blocks": "error",
+        "keyword-spacing": ["error", { "before": true, "after": true }]
     }
 }
