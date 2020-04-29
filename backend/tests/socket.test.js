@@ -1,21 +1,30 @@
-const http = require('http');
+const db       = require('../src/db');
+const http     = require('http');
 const ioClient = require('socket.io-client');
 const ioServer = require('../src/socket');
 
 describe('When a client connect to the server', () => {
-  let app, server, io, client;
+  let app, server, io, client, api, id, username;
   const options = {
     'force new connection': true
   };
 
-  beforeEach((done) => {
+  beforeEach(async (done) => {
+    const supertest = require('supertest');
     app    = require('../src/app');
     server = http.createServer(app);
     io     = ioServer(server);
+    api    = supertest(server);
 
     const serverAddr = server.listen().address();
 
-    client = ioClient.connect(
+    await api.post('/api/tests/reset');
+    await api.post('/api/tests/addtestuser');
+    const res = await api.post('/api/login').send({ username: 'root', password: 'secret' });
+    id = res.body.id;
+    username = res.body.username;
+
+    client = await ioClient.connect(
       `http://[${serverAddr.address}]:${serverAddr.port}`,
       options
     );
@@ -34,8 +43,8 @@ describe('When a client connect to the server', () => {
     await io.close();
   });
 
-  test('a user list is received, when sending username with \'new-user\'-event', (done) => {
-    client.emit('new-user', 'matti');
+  test('a user list is received, when sending username with \'new-user\'-event', async (done) => {
+    await client.emit('new-user', 'matti');
 
     client.on('user-list', (users) => {
       expect(users).toBeDefined();
@@ -44,16 +53,17 @@ describe('When a client connect to the server', () => {
     });
   });
 
-  test('client and server transfer messages between each other', (done) => {
-    const msg = {
-      username: 'matti',
-      message: 'hello world'
-    };
-    client.emit('new-message', msg);
+  test('client and server transfer messages between each other', async (done) => {
+    const msg = { id, username, message: 'hello world' };
+    await client.emit('new-message', msg);
 
     client.on('new-message', (msg) => {
       expect(msg).toBe('You: hello world');
       done();
     });
   });
+});
+
+afterAll(async () => {
+  await db.close();
 });
