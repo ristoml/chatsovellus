@@ -41,7 +41,11 @@ router.post('/', async (request, response, next) => {
     const payload = { id: user.id, username: usernameTrimmed, type: user.type };
     const token = jwt.sign(payload, process.env.SECRET);
 
-    response.status(200).send({ username: user.username, token });
+    response.status(200).send({
+      id: user.id,
+      username: user.username,
+      token
+    });
   } catch (except) {
     next(except);
   }
