@@ -16,17 +16,17 @@
 
 <script>
 export default {
-  data(){
-    return{
-      handle : ""
-    }
+  data() {
+    return {
+      handle: ''
+    };
   },
-  methods : {
-    saveHandle(){
-      this.$store.dispatch("SET_HANDLE",this.handle);
+  methods: {
+    saveHandle() {
+      this.$store.dispatch('SET_HANDLE', this.handle);
     },
   }
-}
+};
 </script>
 
 <style lang="css">

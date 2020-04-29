@@ -5,98 +5,98 @@
           <div v-for="chat in CHATS" class="mt-4 mb-4" style="max-width:80%" :key="chat.handle"  >
               <app-chat-item :chat="chat"></app-chat-item>
           </div>
-        </v-flex>       
+        </v-flex>
         <v-bottom-navigation :value="true" absolute color="blue">
           <v-layout>
             <app-chat-box></app-chat-box>
           </v-layout>
         </v-bottom-navigation>
-         <v-btn        
+         <v-btn
         color="success"
         class="mr-4"
         @click="logout"
       >
         Logout
-      </v-btn>    
+      </v-btn>
     </v-layout>
   </v-app>
-</template>    
+</template>
 
 <script>
-import { mapGetters } from 'vuex'
-import chatItem from '../components/ChatItem'
+import { mapGetters } from 'vuex';
+import chatItem from '../components/ChatItem';
 //import chatHandle from '../components/Handle'
-import chatBox from '../components/ChatBox'
+import chatBox from '../components/ChatBox';
 export default {
-  components : {
-    appChatItem : chatItem,
+  components: {
+    appChatItem: chatItem,
     //appChatHandle : chatHandle,
-    appChatBox : chatBox,
+    appChatBox: chatBox,
   },
-  computed:{
-    ...mapGetters(['CHATS','HANDLE'])
+  computed: {
+    ...mapGetters(['CHATS', 'HANDLE'])
   },
-  mounted(){
-    this.$store.dispatch("SET_CHAT");
-    this.$store.dispatch("SET_HANDLE", this.$store.getters.getUser);
+  mounted() {
+    this.$store.dispatch('SET_CHAT');
+    this.$store.dispatch('SET_HANDLE', this.$store.getters.getUser);
   },
-  updated(){
+  updated() {
     var container = this.$refs.chatContainer;
     container.scrollTop = container.scrollHeight;
   },
-  sockets : {
-    connect: function(){
+  sockets: {
+    connect: function() {
       console.log('socket connected');
     },
-    chat : function(val){
-      this.$store.dispatch("ADD_CHAT",val);
+    chat: function(val) {
+      this.$store.dispatch('ADD_CHAT', val);
     },
-    userList : function(response) {
-      console.log(response)
-    }    
+    userList: function(response) {
+      console.log(response);
+    }
 
   },
   data() {
     return {
-      join: false,      
+      join: false,
       username: null,
       users: null,
       message: null,
       messages: null,
-      
+
     };
   },
   created() {
-   
+
     if (!this.$store.getters.isLoggedIn) {
       this.$router.push('/login');
     }
-    this.username = this.$store.getters.getUser;        
+    this.username = this.$store.getters.getUser;
   },
-  
+
   methods: {
-        logout() {
-          this.$store.dispatch('logout');
-          this.$router.push('/login');     
-        },  
-        joinChat: function (name) {
-            if (name) {
-              this.$socket.emit('join', name);
-            }
-        },
-        joined: function () {
-            this.$set('join', true)
-        },
-        
-  },
-   watch: {
-        messages: function () {
-            setTimeout(function () {
-               //$('.messages ul').scrollTop(999999999);
-            }, 100)
-        }
+    logout() {
+      this.$store.dispatch('logout');
+      this.$router.push('/login');
     },
-    /* 
+    joinChat: function (name) {
+      if (name) {
+        this.$socket.emit('join', name);
+      }
+    },
+    joined: function () {
+      this.$set('join', true);
+    },
+
+  },
+  watch: {
+    messages: function () {
+      setTimeout(function () {
+        //$('.messages ul').scrollTop(999999999);
+      }, 100);
+    }
+  },
+  /*
     sockets: {
         users: function (users) {
             this.$set('users', users);
@@ -113,7 +113,7 @@ export default {
         adduser: function (user) {
             this.users.push(user);
         }
-    } 
+    }
     */
 };
 </script>

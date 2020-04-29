@@ -12,15 +12,15 @@
 </template>
 <script>
 export default {
-  props : ['chat'],
-  methods : {
-    isMyHandle(handle){
-      if (handle == this.$store.getters.getUser) {
-        return true
-      }else{
-        return false
+  props: ['chat'],
+  methods: {
+    isMyHandle(handle) {
+      if (handle === this.$store.getters.getUser) {
+        return true;
+      } else {
+        return false;
       }
     }
   },
-}
+};
 </script>

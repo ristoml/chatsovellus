@@ -2,7 +2,7 @@
   <div id="app">
     <div v-if="!this.$store.getters.isLoggedIn" id="nav">
       <router-link to="/login">Login</router-link> |
-      <router-link to="/register">Register</router-link>      
+      <router-link to="/register">Register</router-link>
     </div>
     <router-view/>
   </div>

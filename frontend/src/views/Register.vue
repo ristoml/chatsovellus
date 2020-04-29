@@ -2,37 +2,37 @@
   <div id="app">
   <v-app id="inspire">
     <v-form
-      ref="form"     
+      ref="form"
       lazy-validation
     >
-    <h1>Register</h1> 
+    <h1>Register</h1>
     <v-text-field
         v-model="realname"
-        :counter="10"        
+        :counter="10"
         label="Real name"
         required
-      ></v-text-field>       
+      ></v-text-field>
    <v-text-field
         v-model="username"
-        :counter="10"        
+        :counter="10"
         label="Username"
         required
       ></v-text-field>
     <v-text-field
-        v-model="password"            
+        v-model="password"
         label="Password"
-        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"   
-        :type="show1 ? 'text' : 'password'"    
+        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="show1 ? 'text' : 'password'"
         required
          @click:append="show1 = !show1"
-      ></v-text-field>     
-    <v-btn       
+      ></v-text-field>
+    <v-btn
         color="success"
         class="mr-4"
         @click="signUp"
       >
         Register
-      </v-btn>        
+      </v-btn>
     <p v-if="msg">{{ msg }}</p>
     </v-form>
   </v-app>
@@ -47,7 +47,7 @@ export default {
       realname: '',
       username: '',
       password: '',
-      type: 'user',      
+      type: 'user',
       msg: ''
     };
   },
@@ -57,11 +57,11 @@ export default {
         const credentials = {
           realname: this.realname,
           username: this.username,
-          password: this.password,         
+          password: this.password,
           type: this.type,
         };
         const response = await AuthService.signUp(credentials);
-        this.msg = response.msg;                
+        this.msg = response.msg;
       } catch (error) {
         this.msg = error.response.data.error;
         //alert(error.response.data.error);

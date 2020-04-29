@@ -16,26 +16,26 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      message : ""
-    }
+      message: ''
+    };
   },
-  methods : {
-    async sendMessage(){        
-      if(this.message){
+  methods: {
+    async sendMessage() {
+      if (this.message) {
         let message = {
-            id : this.$store.getters.getUser.id,
-            username : this.$store.getters.getUser.username,
-            message : this.message
-          }
-         console.log(message) 
+          id: this.$store.getters.getUser.id,
+          username: this.$store.getters.getUser.username,
+          message: this.message
+        };
+        console.log(message);
         let response = await this.$socket.emit('newMessage', message);
-        this.message = "";
+        this.message = '';
       }
     },
   }
-}
+};
 </script>
 
 <style lang="css">
