@@ -16,7 +16,7 @@ export default {
   props : ['chat'],
   methods : {
     isMyHandle(handle){
-      if (handle == this.$store.getters.HANDLE) {
+      if (handle == this.$store.getters.getUser) {
         return true
       }else{
         return false

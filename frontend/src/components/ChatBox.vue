@@ -23,11 +23,12 @@ export default {
   },
   methods : {
     async sendMessage(){        
-      if(this.handle || this.message){
+      if(this.message){
         let message = {
-            username : 'test',
+            username : this.$store.getters.getUser,
             message : this.message
           }
+         console.log(message) 
         let response = await this.$socket.emit('new-message', message);
         this.message = "";
       }
