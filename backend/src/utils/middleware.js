@@ -1,5 +1,5 @@
-/** 
- * 
+/**
+ *
  * @module utils/middleware */
 const morgan = require('morgan');
 

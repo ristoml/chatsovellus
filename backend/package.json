@@ -9,7 +9,8 @@
         "watch": "NODE_ENV=development nodemon src/index.js",
         "test": "cross-env jest --verbose --runInBand",
         "test:openhandles": "cross-env jest --verbose --runInBand --detectOpenHandles",
-        "jsdoc": "jsdoc -t node_modules/minami -c ./.jsdoc.json ."
+        "jsdoc": "jsdoc -t node_modules/minami -c ./.jsdoc.json .",
+        "lint": "eslint --ext .js ./src"
     },
     "author": "",
     "license": "MIT",

@@ -1,4 +1,4 @@
-/** 
+/**
  * Uses dotenv to configure environment variables, and provides them.
  * @module utils/config */
 require('dotenv').config();
