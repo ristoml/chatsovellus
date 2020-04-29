@@ -5,14 +5,14 @@
       ref="form"     
       lazy-validation
     >
-    <h1>Login</h1>
-    <v-text-field
+    <h1>Login</h1>        
+      <v-text-field
         v-model="username"
         :counter="10"        
         label="Username"
         required
-      ></v-text-field>
-  
+      ></v-text-field>        
+ 
       <v-text-field
         v-model="password"            
         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"   
@@ -21,7 +21,7 @@
         required
         @click:append="show1 = !show1"
       ></v-text-field>     
-    
+  
     <v-btn       
         color="success"
         class="mr-4"

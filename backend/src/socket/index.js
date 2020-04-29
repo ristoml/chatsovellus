@@ -32,6 +32,7 @@ const init = (server) => {
                 );
                 return;
             }
+            console.log(data);
             const { username, message } = data;
 
             if (!username) {
