@@ -13,6 +13,7 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuetify);
 import 'vuetify/dist/vuetify.min.css'
+import vuetify from './plugins/vuetify';
 Vue.use(require('vue-moment'))
 Vue.use(new VueSocketIO({
     debug: false,
@@ -27,5 +28,6 @@ Vue.use(new VueSocketIO({
 new Vue({
     router,
     store,
+    vuetify,
     render: h => h(App)
 }).$mount('#app');

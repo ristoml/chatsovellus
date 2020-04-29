@@ -22,13 +22,13 @@ export default {
     }
   },
   methods : {
-    async sendMessage(){
+    async sendMessage(){        
       if(this.handle || this.message){
         let message = {
-            handle : this.handle,
+            username : 'test',
             message : this.message
           }
-        let response = await this.$socket.emit('chat',message);
+        let response = await this.$socket.emit('new-message', message);
         this.message = "";
       }
     },

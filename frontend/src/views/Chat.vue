@@ -37,6 +37,7 @@ export default {
   },
   mounted(){
     this.$store.dispatch("SET_CHAT");
+    this.$store.dispatch("SET_HANDLE", this.$store.getters.getUser);
   },
   updated(){
     var container = this.$refs.chatContainer;
