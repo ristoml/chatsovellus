@@ -1,12 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-// import Axios from 'axios';
+import Axios from 'axios';
 import createPersistedState from 'vuex-persistedstate';
 Vue.use(Vuex);
 const getDefaultState = () => {
     return {
         token: '',
-        user: {}
+        user: {},
+        chats: null
     };
 };
 export default new Vuex.Store({
@@ -19,14 +20,23 @@ export default new Vuex.Store({
         },
         getUser: state => {
             return state.user;
+        },
+        CHATS: state => {
+            return state.chats
+        },
+        HANDLE: state => {
+            return state.user
         }
     },
     mutations: {
         SET_TOKEN: (state, token) => {
             state.token = token;
         },
-        SET_USER: (state, user) => {
+        SET_HANDLE: (state, user) => {
             state.user = user;
+        },
+        ADD_CHAT: (state, payload) => {
+            state.chats.push(payload);
         },
         RESET: state => {
             Object.assign(state, getDefaultState());
@@ -34,11 +44,23 @@ export default new Vuex.Store({
     },
     actions: {
         login: ({ commit, _dispatch }, { token, user }) => {
-            commit('SET_USER', user);
+            commit('SET_HANDLE', user);
             commit('SET_TOKEN', token);
         },
         logout: ({ commit }) => {
             commit('RESET', '');
+        },
+        SET_CHAT: async(context, payload) => {
+            let { data } = await Axios.get('http://localhost:3004/chat');
+            console.log(data);
+            context.commit("SET_CHAT", data);
+        },
+        ADD_CHAT: (context, payload) => {
+            context.commit("ADD_CHAT", payload);
+        },
+        SET_HANDLE: (context, payload) => {
+            context.commit("SET_HANDLE", payload);
         }
-    }
+    },
+
 });
