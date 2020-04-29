@@ -24,17 +24,28 @@ const init = (server) => {
       io.emit('user-list', users);
     });
 
-    socket.on('new-message', (message) => {
-      if (typeof message !== 'string') {
+    socket.on('new-message', (data) => {
+      if (typeof data !== 'object') {
         socket.emit(
           'error',
-          `ERROR: expected a string but was ${typeof message} for event new-message.`
+          `ERROR: expected an object but was ${typeof data} for event new-message.`
         );
         return;
       }
+      const { username, message } = data;
+
+      if (!username) {
+        socket.emit('error', 'missing username');
+        return;
+      }
+      if (!message) {
+        socket.emit('error', 'missing message');
+        return;
+      }
       const youmsg = 'You: ' + message;
+      const msg = `${username}: ${message}`;
       socket.emit('new-message', youmsg);
-      socket.broadcast.emit('new-message', message);
+      socket.broadcast.emit('new-message', msg);
     });
 
     socket.on('disconnect', () => {

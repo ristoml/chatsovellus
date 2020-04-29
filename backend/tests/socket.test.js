@@ -45,7 +45,11 @@ describe('When a client connect to the server', () => {
   });
 
   test('client and server transfer messages between each other', (done) => {
-    client.emit('new-message', 'hello world');
+    const msg = {
+      username: 'matti',
+      message: 'hello world'
+    };
+    client.emit('new-message', msg);
 
     client.on('new-message', (msg) => {
       expect(msg).toBe('You: hello world');
