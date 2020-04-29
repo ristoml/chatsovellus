@@ -43,10 +43,10 @@ describe('When a client connect to the server', () => {
     await io.close();
   });
 
-  test('a user list is received, when sending username with \'new-user\'-event', async (done) => {
-    await client.emit('new-user', 'matti');
+  test('a user list is received, when sending username with \'newUser\'-event', async (done) => {
+    await client.emit('newUser', 'matti');
 
-    client.on('user-list', (users) => {
+    client.on('userList', (users) => {
       expect(users).toBeDefined();
       expect(users).toContain('matti');
       done();
@@ -55,9 +55,9 @@ describe('When a client connect to the server', () => {
 
   test('client and server transfer messages between each other', async (done) => {
     const msg = { id, username, message: 'hello world' };
-    await client.emit('new-message', msg);
+    await client.emit('newMessage', msg);
 
-    client.on('new-message', (msg) => {
+    client.on('newMessage', (msg) => {
       expect(msg).toBe('You: hello world');
       done();
     });

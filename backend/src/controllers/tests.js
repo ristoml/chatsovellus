@@ -2,9 +2,38 @@ const bcrypt = require('bcrypt');
 const db     = require('../db');
 const router = require('express').Router();
 
-router.get('/allmessages', async (_request, response) => {
-  const res = await db.query('DELETE * messages');
-  response.status(200).json(res.body);
+router.post('/adduserandmessages', async (_request, response, next) => {
+  const testPass = 'secret';
+  const saltRounds = 10;
+  const hash = await bcrypt.hash(testPass, saltRounds);
+
+  await db.query('INSERT INTO users (username, realname, passwordhash, type) VALUES ($1, $2, $3, $4)',
+    ['someuser', 'user', hash, 'admin']);
+
+  const res = await db.query('SELECT id, username FROM users WHERE username = $1', ['someuser']);
+  const { id } = res.rows[0];
+
+  const promiseArray = [ 'message1', 'message2', 'message3', 'message4' ].map((message) => {
+    const promise = async () => {
+      const date = new Date();
+      const [ m, d, y ] = [ date.getUTCMonth()+1, date.getUTCDate(), date.getUTCFullYear() ];
+      const time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+      const created = `${y}-${m}-${d} ${time}`;
+
+      await db.query(
+        'INSERT INTO messages (userid, message, created) VALUES ($1, $2, $3)',
+        [id, message, created]
+      );
+    };
+    return promise();
+  });
+
+  try {
+    await Promise.all(promiseArray);
+    response.status(204).end();
+  } catch (expect) {
+    next(expect);
+  }
 });
 
 router.post('/reset', async (_request, response) => {
