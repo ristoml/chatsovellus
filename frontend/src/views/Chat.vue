@@ -63,9 +63,7 @@ export default {
     if (!this.$store.getters.isLoggedIn) {
       this.$router.push('/login');
     }
-    this.username = this.$store.getters.getUser;
-    var container = this.$refs.chatContainer;
-    container.scrollTop = container.scrollHeight;
+    this.goTo(this.pageHeight);
   }
 };
 </script>

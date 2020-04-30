@@ -2,9 +2,8 @@
   <div id="app">
   <v-app id="inspire">
     <v-form
+      @submit="login"
       ref="form"
-      lazy-validation
-      @submit="login()"
     >
     <h1>Login</h1>
       <v-text-field
@@ -48,7 +47,8 @@ export default {
     };
   },
   methods: {
-    async login() {
+    async login(event) {
+      event.preventDefault();
       try {
         const credentials = {
           username: this.username,
