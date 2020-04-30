@@ -17,10 +17,9 @@ const handleMessage = async (socket, data) => {
     [id, message, created]
   );
 
-  const youmsg = `You: ${message}`;
-  const msg    = `${username}: ${message}`;
-  await socket.emit('newMessage', youmsg);
-  await socket.broadcast.emit('newMessage', msg);
+  const msg = { created, message };
+  await socket.emit('newMessage', { ...msg, username: 'You' });
+  await socket.broadcast.emit('newMessage', { ...msg, username });
 };
 
 const init = (server) => {
