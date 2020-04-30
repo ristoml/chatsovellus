@@ -1,5 +1,6 @@
 const db     = require('../db');
 const router = require('express').Router();
+const { dateString } = require('../utils/helpers');
 
 router.get('/', async (request, response, next) => {
   try {
@@ -11,7 +12,7 @@ router.get('/', async (request, response, next) => {
       );
 
     const rows = query.rows.map(({ username, message, created }) => {
-      return { username, message, created };
+      return { username, message, created: dateString(created) };
     });
 
     response

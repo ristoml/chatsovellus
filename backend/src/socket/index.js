@@ -1,23 +1,20 @@
-const db       = require('../db');
+const db = require('../db');
 const socketio = require('socket.io');
+const { dateString, dateForDb } = require('../utils/helpers');
 
 const sockets = {};
 
 const handleMessage = async (socket, data) => {
   const { id, username, message } = data;
-
-  const date = new Date();
-  const [ m, d, y ] = [ date.getUTCMonth()+1, date.getUTCDate(), date.getUTCFullYear() ];
-  const time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-
-  const created = `${y}-${m}-${d} ${time}`;
+  const now = new Date();
+  const created = dateForDb(now);
 
   await db.query(
     'INSERT INTO messages (userid, message, created) VALUES ($1, $2, $3)',
     [id, message, created]
   );
 
-  const msg = { created, message };
+  const msg = { created: dateString(now), message };
   await socket.emit('newMessage', { ...msg, username: 'You' });
   await socket.broadcast.emit('newMessage', { ...msg, username });
 };
