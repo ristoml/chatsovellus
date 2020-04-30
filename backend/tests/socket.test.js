@@ -58,7 +58,8 @@ describe('When a client connect to the server', () => {
     await client.emit('newMessage', msg);
 
     client.on('newMessage', (msg) => {
-      expect(msg).toBe('You: hello world');
+      expect(msg.username).toBe('You');
+      expect(msg.message).toBe('hello world');
       done();
     });
   });
