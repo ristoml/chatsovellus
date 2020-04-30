@@ -7,11 +7,18 @@
       v-model="message"
       solo
       ref="message"
+      style="padding-bottom:20px"
       >
     </v-text-field>
+    <v-btn
+        color="success"
+        class="mr-4"
+        @click="logout"
+      >
+        Logout
+      </v-btn>
     </v-form>
   </v-flex>
-
 </template>
 
 <script>
@@ -33,6 +40,10 @@ export default {
         this.message = '';
       }
     },
+    logout() {
+      this.$store.dispatch('logout');
+      this.$router.push('/login');
+    }
   }
 };
 </script>

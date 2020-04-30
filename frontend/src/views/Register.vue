@@ -4,6 +4,7 @@
     <v-form
       ref="form"
       lazy-validation
+      @submit="signUp()"
     >
     <h1>Register</h1>
     <v-text-field
@@ -27,9 +28,9 @@
          @click:append="show1 = !show1"
       ></v-text-field>
     <v-btn
+        type="submit"
         color="success"
         class="mr-4"
-        @click="signUp"
       >
         Register
       </v-btn>

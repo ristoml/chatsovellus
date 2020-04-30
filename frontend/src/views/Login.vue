@@ -4,6 +4,7 @@
     <v-form
       ref="form"
       lazy-validation
+      @submit="login()"
     >
     <h1>Login</h1>
       <v-text-field
@@ -23,9 +24,9 @@
       ></v-text-field>
 
     <v-btn
+        type="submit"
         color="success"
         class="mr-4"
-        @click="login"
       >
         Login
       </v-btn>

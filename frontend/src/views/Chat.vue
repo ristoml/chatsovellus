@@ -1,6 +1,6 @@
 <template>
   <v-app id="app" class="fill-height">
-    <v-layout row class="fill-height" style="padding-bottom:60px" >
+    <v-layout row class="fill-height" style="padding-bottom:60px">
         <v-flex md8 offset-md2 style="overflow:auto;" class="pr-3 pl-3" v-if="USER" ref="chatContainer">
           <div v-for="(message, i) in MESSAGES" class="mt-4 mb-4" style="max-width:80%" :key="i">
               <app-chat-item :message="message"></app-chat-item>
@@ -11,13 +11,6 @@
             <app-chat-box></app-chat-box>
           </v-layout>
         </v-bottom-navigation>
-         <v-btn
-        color="success"
-        class="mr-4"
-        @click="logout"
-      >
-        Logout
-      </v-btn>
     </v-layout>
   </v-app>
 </template>
@@ -25,15 +18,16 @@
 <script>
 import { mapGetters } from 'vuex';
 import chatItem from '../components/ChatItem';
-//import chatHandle from '../components/Handle'
 import chatBox from '../components/ChatBox';
 export default {
   components: {
     appChatItem: chatItem,
-    //appChatHandle : chatHandle,
     appChatBox: chatBox,
   },
   computed: {
+    pageHeight () {
+      return document.body.scrollHeight;
+    },
     ...mapGetters(['MESSAGES', 'USER'])
   },
   mounted() {
@@ -41,8 +35,7 @@ export default {
     this.$store.dispatch('SET_USER', this.$store.getters.getUser);
   },
   updated() {
-    var container = this.$refs.chatContainer;
-    container.scrollTop = container.scrollHeight;
+    this.goTo(this.pageHeight);
   },
   sockets: {
     connect: function() {
@@ -71,24 +64,13 @@ export default {
       this.$router.push('/login');
     }
     this.username = this.$store.getters.getUser;
-  },
-  methods: {
-    logout() {
-      this.$store.dispatch('logout');
-      this.$router.push('/login');
-    },
-  },
-  watch: {
-    messages: function () {
-      setTimeout(function () {
-        //$('.messages ul').scrollTop(999999999);
-      }, 100);
-    }
-  },
+    var container = this.$refs.chatContainer;
+    container.scrollTop = container.scrollHeight;
+  }
 };
 </script>
 <style>
-html,body{
-  height: 100%
+html, body{
+  height: 50%;
 }
 </style>
