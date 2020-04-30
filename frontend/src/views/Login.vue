@@ -55,13 +55,11 @@ export default {
         };
         const response = await AuthService.login(credentials);
         this.msg = response.msg;
-        const token = response.token;
-        let user = {
-          id: response.id,
-          username: response.username
-        };
 
-        this.$store.dispatch('login', { token, user });
+        const user = { ...response };
+        delete user['token'];
+        const token = response.token;
+        this.$store.dispatch('login', { user, token });
 
         this.$router.push('/');
       } catch (error) {

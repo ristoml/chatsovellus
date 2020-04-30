@@ -2,14 +2,17 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import Axios from 'axios';
 import createPersistedState from 'vuex-persistedstate';
+
 Vue.use(Vuex);
+
 const getDefaultState = () => {
   return {
     token: '',
     user: {},
-    chats: null
+    messages: null
   };
 };
+
 export default new Vuex.Store({
   strict: true,
   plugins: [createPersistedState()],
@@ -21,10 +24,10 @@ export default new Vuex.Store({
     getUser: state => {
       return state.user;
     },
-    CHATS: state => {
-      return state.chats;
+    MESSAGES: state => {
+      return state.messages;
     },
-    HANDLE: state => {
+    USER: state => {
       return state.user;
     }
   },
@@ -32,37 +35,36 @@ export default new Vuex.Store({
     SET_TOKEN: (state, token) => {
       state.token = token;
     },
-    SET_HANDLE: (state, user) => {
+    SET_USER: (state, user) => {
       state.user = user;
     },
-    ADD_CHAT: (state, payload) => {
-      state.chats.push(payload);
+    ADD_MESSAGE: (state, payload) => {
+      state.messages.push(payload);
     },
     RESET: state => {
       Object.assign(state, getDefaultState());
     },
-    SET_CHAT: (state, payload) => {
-      state.chats = payload;
+    SET_MESSAGES: (state, payload) => {
+      state.messages = payload.reverse();
     }
   },
   actions: {
-    login: ({ commit, _dispatch }, { token, user }) => {
-      commit('SET_HANDLE', user);
+    login: ({ commit }, { token, user }) => {
+      commit('SET_USER', user);
       commit('SET_TOKEN', token);
     },
     logout: ({ commit }) => {
       commit('RESET', '');
     },
-    SET_CHAT: async(context, payload) => {
+    SET_MESSAGES: async(context) => {
       let { data } = await Axios.get('/api/chat/');
-      console.log(data);
-      context.commit('SET_CHAT', data);
+      context.commit('SET_MESSAGES', data);
     },
-    ADD_CHAT: (context, payload) => {
-      context.commit('ADD_CHAT', payload);
+    ADD_MESSAGE: (context, payload) => {
+      context.commit('ADD_MESSAGE', payload);
     },
-    SET_HANDLE: (context, payload) => {
-      context.commit('SET_HANDLE', payload);
+    SET_USER: (context, payload) => {
+      context.commit('SET_USER', payload);
     }
   },
 

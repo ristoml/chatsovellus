@@ -1,9 +1,9 @@
 <template>
   <v-app id="app" class="fill-height">
     <v-layout row class="fill-height" style="padding-bottom:60px" >
-        <v-flex md8 offset-md2 style="overflow:auto;" class="pr-3 pl-3" v-if="HANDLE" ref="chatContainer">
-          <div v-for="chat in CHATS" class="mt-4 mb-4" style="max-width:80%" :key="chat.handle"  >
-              <app-chat-item :chat="chat"></app-chat-item>
+        <v-flex md8 offset-md2 style="overflow:auto;" class="pr-3 pl-3" v-if="USER" ref="chatContainer">
+          <div v-for="(message, i) in MESSAGES" class="mt-4 mb-4" style="max-width:80%" :key="i">
+              <app-chat-item :message="message"></app-chat-item>
           </div>
         </v-flex>
         <v-bottom-navigation :value="true" absolute color="blue">
@@ -34,11 +34,11 @@ export default {
     appChatBox: chatBox,
   },
   computed: {
-    ...mapGetters(['CHATS', 'HANDLE'])
+    ...mapGetters(['MESSAGES', 'USER'])
   },
   mounted() {
-    this.$store.dispatch('SET_CHAT');
-    this.$store.dispatch('SET_HANDLE', this.$store.getters.getUser);
+    this.$store.dispatch('SET_MESSAGES');
+    this.$store.dispatch('SET_USER', this.$store.getters.getUser);
   },
   updated() {
     var container = this.$refs.chatContainer;
@@ -48,13 +48,13 @@ export default {
     connect: function() {
       console.log('socket connected');
     },
-    chat: function(val) {
-      this.$store.dispatch('ADD_CHAT', val);
-    },
     userList: function(response) {
       console.log(response);
+    },
+    newMessage: function(data) {
+      console.log('got new message ', data);
+      this.$store.dispatch('ADD_MESSAGE', data);
     }
-
   },
   data() {
     return {
@@ -67,27 +67,16 @@ export default {
     };
   },
   created() {
-
     if (!this.$store.getters.isLoggedIn) {
       this.$router.push('/login');
     }
     this.username = this.$store.getters.getUser;
   },
-
   methods: {
     logout() {
       this.$store.dispatch('logout');
       this.$router.push('/login');
     },
-    joinChat: function (name) {
-      if (name) {
-        this.$socket.emit('join', name);
-      }
-    },
-    joined: function () {
-      this.$set('join', true);
-    },
-
   },
   watch: {
     messages: function () {
@@ -96,25 +85,6 @@ export default {
       }, 100);
     }
   },
-  /*
-    sockets: {
-        users: function (users) {
-            this.$set('users', users);
-        },
-        joined: function () {
-            this.$set('join', true)
-        },
-        messages: function (data) {
-            this.$set('messages', data);
-        },
-        onmessage: function (data) {
-            this.messages.push(data);
-        },
-        adduser: function (user) {
-            this.users.push(user);
-        }
-    }
-    */
 };
 </script>
 <style>

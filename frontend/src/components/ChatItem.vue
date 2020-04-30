@@ -2,24 +2,20 @@
     <v-tooltip left>
        <span slot="activator">
          <p class="grey--text text--darken-2">
-           <b class="indigo--text" v-if="isMyHandle(chat.handle)">{{chat.handle}} :</b>
-           <b class="pink--text" v-else>Me :</b>
-           {{chat.message}}
+           <b class="indigo--text" v-if="isMyHandle(message.username)">You: </b>
+           <b class="indigo--text" v-else>{{message.username}} :</b>
+           {{ message.message }}
+         <span>[ {{ message.created }} ]</span>
          </p>
        </span>
-       <span>{{chat.created | moment("HH:MM, DD-MM-YY")}}</span>
     </v-tooltip>
 </template>
 <script>
 export default {
-  props: ['chat'],
+  props: ['message'],
   methods: {
     isMyHandle(handle) {
-      if (handle === this.$store.getters.getUser) {
-        return true;
-      } else {
-        return false;
-      }
+      return handle === this.$store.getters.getUser.username;
     }
   },
 };

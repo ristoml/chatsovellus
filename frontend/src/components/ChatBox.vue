@@ -29,8 +29,7 @@ export default {
           username: this.$store.getters.getUser.username,
           message: this.message
         };
-        console.log(message);
-        let response = await this.$socket.emit('newMessage', message);
+        await this.$socket.emit('newMessage', message);
         this.message = '';
       }
     },

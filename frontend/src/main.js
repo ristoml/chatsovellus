@@ -5,11 +5,7 @@ import store from './store/store.js';
 import VueSocketIO from 'vue-socket.io';
 import Vuetify from 'vuetify';
 
-
-//import Axios from 'axios';
-
 Vue.config.productionTip = false;
-
 
 Vue.use(Vuetify);
 import 'vuetify/dist/vuetify.min.css';
