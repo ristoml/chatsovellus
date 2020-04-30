@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const db     = require('../db');
 const router = require('express').Router();
+const { dateForDb } = require('../utils/helpers');
 
 router.post('/adduserandmessages', async (_request, response, next) => {
   const testPass = 'secret';
@@ -15,11 +16,7 @@ router.post('/adduserandmessages', async (_request, response, next) => {
 
   const promiseArray = [ 'message1', 'message2', 'message3', 'message4' ].map((message) => {
     const promise = async () => {
-      const date = new Date();
-      const [ m, d, y ] = [ date.getUTCMonth()+1, date.getUTCDate(), date.getUTCFullYear() ];
-      const time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-      const created = `${y}-${m}-${d} ${time}`;
-
+      const created = dateForDb(new Date());
       await db.query(
         'INSERT INTO messages (userid, message, created) VALUES ($1, $2, $3)',
         [id, message, created]
