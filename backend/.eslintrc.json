@@ -14,6 +14,15 @@
         "ecmaVersion": 2018
     },
     "rules": {
+        "eqeqeq": "error",
+        "no-var": "error",
+        "prefer-const": ["error", {
+            "destructuring": "any",
+            "ignoreReadBeforeAssign": false
+        }],
+        "no-use-before-define": "error",
+        "no-await-in-loop": "error",
+
         "indent": [
             2, 
             2, 
@@ -34,7 +43,6 @@
         "no-unused-vars": ["warn", {
             "argsIgnorePattern": "^_"
         }],
-        "eqeqeq": "error",
         "no-trailing-spaces": "error",
         "object-curly-spacing": [
             "error", "always"
@@ -54,6 +62,14 @@
         "dot-notation": "error",
         "key-spacing": ["error", {  "afterColon": true, "beforeColon": false }],
         "space-before-blocks": "error",
-        "keyword-spacing": ["error", { "before": true, "after": true }]
+        "keyword-spacing": ["error", { "before": true, "after": true }],
+        "space-before-function-paren": [
+            "error", {"anonymous": "always", "named": "never", "asyncArrow": "always"}
+        ],
+        "no-constant-condition": "error",
+        "no-extra-semi": "error",
+        "no-useless-return": "error",
+        "require-await": "error",
+        "no-confusing-arrow": "error"
     }
 }

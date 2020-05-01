@@ -41,7 +41,7 @@ const init = (server) => {
       io.emit('userList', users);
     });
 
-    socket.on('newMessage', async(data) => {
+    socket.on('newMessage', async (data) => {
       if (typeof data !== 'object') {
         socket.emit(
           'error',
