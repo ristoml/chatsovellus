@@ -2,19 +2,18 @@
   <div id="app">
   <v-app id="inspire">
     <v-form
+      style="padding:50px"
       @submit="signUp"
       ref="form"
     >
-    <h1>Register</h1>
+    <h1>Register to Webchat</h1>
     <v-text-field
         v-model="realname"
-        :counter="10"
         label="Real name"
         required
       ></v-text-field>
    <v-text-field
         v-model="username"
-        :counter="10"
         label="Username"
         required
       ></v-text-field>

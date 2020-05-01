@@ -2,13 +2,13 @@
   <div id="app">
   <v-app id="inspire">
     <v-form
+      style="padding:50px"
       @submit="login"
       ref="form"
     >
-    <h1>Login</h1>
+    <h1>Login to Webchat</h1>
       <v-text-field
         v-model="username"
-        :counter="10"
         label="Username"
         required
       ></v-text-field>

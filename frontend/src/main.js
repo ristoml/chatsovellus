@@ -6,7 +6,6 @@ import VueSocketIO from 'vue-socket.io';
 import Vuetify from 'vuetify';
 
 Vue.config.productionTip = false;
-
 Vue.use(Vuetify);
 import 'vuetify/dist/vuetify.min.css';
 import vuetify from './plugins/vuetify';

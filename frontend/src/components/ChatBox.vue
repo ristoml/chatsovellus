@@ -7,16 +7,9 @@
       v-model="message"
       solo
       ref="message"
-      style="padding-bottom:20px"
+      style="padding-bottom:0px"
       >
     </v-text-field>
-    <v-btn
-        color="success"
-        class="mr-4"
-        @click="logout"
-      >
-        Logout
-      </v-btn>
     </v-form>
   </v-flex>
 </template>
