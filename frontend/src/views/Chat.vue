@@ -1,23 +1,23 @@
 <template>
 <div>
     <div class="fixed-top">
-      <b-button v-b-toggle.userlist variant="success" style="margin:10px">Userlist</b-button>
+      <b-button v-b-toggle.userlist variant="success" style="margin:10px">User list</b-button>
       <b-button @click="logout" variant="danger">Sign out</b-button>
     </div>
     <div>
-      <b-sidebar id="userlist" title="Users" right shadow backdrop>
-        <p>User list</p>
+      <b-sidebar id="userlist" title="Users in the chat" right shadow backdrop>
+        <div v-for="(user, i) in USERS" :key="i">
+          {{ user }}
+        </div>
       </b-sidebar>
     </div>
-    <div style="padding:60px">
+    <div style="padding:60px" id="container">
     <b-container>
       <b-row>
         <b-col cols="9">
-          <div ref="msgs">
           <b-row v-for="(message, i) in MESSAGES" style="max-width:80%" :key="i">
               <app-chat-item :message="message"></app-chat-item>
           </b-row>
-          </div>
         </b-col>
       </b-row>
       <b-row>
@@ -40,23 +40,25 @@ export default {
     appChatBox: chatBox,
   },
   computed: {
-    ...mapGetters(['MESSAGES', 'USER'])
+    ...mapGetters(['MESSAGES', 'USER', 'USERS'])
   },
   methods: {
     logout() {
       this.$store.dispatch('logout');
       this.$router.push('/login');
-    }
+    },
+    scrollToEnd() {
+      var container = this.$el.querySelector('#container');
+      container.scrollTop = container.scrollHeight;
+    },
   },
   mounted() {
     this.$store.dispatch('SET_MESSAGES');
     this.$store.dispatch('SET_USER', this.$store.getters.getUser);
-    var container = this.$refs.msgs;
-    container.scrollTop = container.scrollHeight;
+    this.scrollToEnd();
   },
   updated() {
-    var container = this.$refs.msgs;
-    container.scrollTop = container.scrollHeight;
+    this.scrollToEnd();
   },
   sockets: {
     connect: function() {
@@ -65,6 +67,7 @@ export default {
     },
     userList: function(response) {
       console.log(response);
+      this.$store.dispatch('SET_USERS', response);
     },
     newMessage: function(data) {
       console.log('got new message ', data);

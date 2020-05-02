@@ -9,6 +9,7 @@ const getDefaultState = () => {
   return {
     token: '',
     user: {},
+    users: [],
     messages: null
   };
 };
@@ -29,6 +30,9 @@ export default new Vuex.Store({
     },
     USER: state => {
       return state.user;
+    },
+    USERS: state => {
+      return state.users;
     }
   },
   mutations: {
@@ -37,6 +41,9 @@ export default new Vuex.Store({
     },
     SET_USER: (state, user) => {
       state.user = user;
+    },
+    SET_USERS: (state, users) => {
+      state.users = users;
     },
     ADD_MESSAGE: (state, payload) => {
       state.messages.push(payload);
@@ -65,6 +72,9 @@ export default new Vuex.Store({
     },
     SET_USER: (context, payload) => {
       context.commit('SET_USER', payload);
+    },
+    SET_USERS: (context, payload) => {
+      context.commit('SET_USERS', payload);
     }
   },
 
