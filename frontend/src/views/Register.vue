@@ -64,7 +64,6 @@ export default {
   },
   methods: {
     created() {
-    //  this.$vuetify.theme.dark = true;
     },
     async signUp(event) {
       event.preventDefault();
@@ -76,10 +75,9 @@ export default {
           type: this.type,
         };
         const response = await AuthService.signUp(credentials);
-        this.msg = response.msg;
+        this.msg = response;
       } catch (error) {
         this.msg = error.response.data.error;
-        //alert(error.response.data.error);
       }
     }
   }
@@ -95,7 +93,6 @@ h1 {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 40em
 }
 #nav {
   padding: 30px;

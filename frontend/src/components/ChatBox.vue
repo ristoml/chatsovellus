@@ -24,9 +24,6 @@ export default {
     };
   },
   methods: {
-    created() {
-    // this.$vuetify.theme.dark = true;
-    },
     async sendMessage() {
       if (this.message) {
         let message = {

@@ -10,10 +10,7 @@ export default {
       this.$store.dispatch('logout');
       this.$router.push('/login');
     }
-  },
-  created() {
-    this.scrollTop = document.body.scrollHeight;
-  },
+  }
 };
 </script>
 <style>

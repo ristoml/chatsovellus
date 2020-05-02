@@ -49,7 +49,6 @@ export default {
   },
   methods: {
     created() {
-    //  this.$vuetify.theme.dark = true;
     },
     async login(event) {
       event.preventDefault();
@@ -85,7 +84,6 @@ h1 {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 40em
 }
 #nav {
   padding: 30px;

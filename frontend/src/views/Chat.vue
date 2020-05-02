@@ -5,29 +5,23 @@
       <b-button @click="logout" variant="danger">Sign out</b-button>
     </div>
     <div>
-      <b-sidebar id="userlist" title="Users in the chat" right shadow backdrop>
-        <div v-for="(user, i) in USERS" :key="i">
+      <b-sidebar id="userlist" title="Users in chat" right shadow backdrop>
+        <div v-for="(user, i) in USERS" :key="i" style="padding:60px">
           {{ user }}
         </div>
       </b-sidebar>
     </div>
-    <div style="padding:60px" id="container">
-    <b-container>
-      <b-row>
-        <b-col cols="9">
+    <div>
+    <b-container ref="container" style="overflow:hidden">
           <b-row v-for="(message, i) in MESSAGES" style="max-width:80%" :key="i">
               <app-chat-item :message="message"></app-chat-item>
           </b-row>
-        </b-col>
-      </b-row>
-      <b-row>
+      </b-container>
+    </div>
         <div class="fixed-bottom">
           <app-chat-box></app-chat-box>
         </div>
-      </b-row>
-    </b-container>
     </div>
-</div>
 </template>
 
 <script>
@@ -46,19 +40,16 @@ export default {
     logout() {
       this.$store.dispatch('logout');
       this.$router.push('/login');
-    },
-    scrollToEnd() {
-      var container = this.$el.querySelector('#container');
-      container.scrollTop = container.scrollHeight;
-    },
+    }
   },
   mounted() {
     this.$store.dispatch('SET_MESSAGES');
     this.$store.dispatch('SET_USER', this.$store.getters.getUser);
-    this.scrollToEnd();
   },
   updated() {
-    this.scrollToEnd();
+    var elem = this.$refs.container;
+    console.log(elem.clientHeight);
+    elem.scrollTop = elem.clientHeight;
   },
   sockets: {
     connect: function() {
@@ -66,7 +57,7 @@ export default {
       this.$socket.emit('newUser', this.$store.getters.getUser.username);
     },
     userList: function(response) {
-      console.log(response);
+      console.log('userlist received: '+ response);
       this.$store.dispatch('SET_USERS', response);
     },
     newMessage: function(data) {
@@ -81,7 +72,6 @@ export default {
       users: null,
       message: null,
       messages: null,
-
     };
   },
   created() {
