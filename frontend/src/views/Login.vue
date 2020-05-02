@@ -1,39 +1,40 @@
 <template>
-  <div id="app">
-  <v-app id="inspire">
-    <v-form
-      style="padding:50px"
-      @submit="login"
-      ref="form"
-    >
-    <h1>Login to Webchat</h1>
-      <v-text-field
-        v-model="username"
-        label="Username"
-        required
-      ></v-text-field>
-
-      <v-text-field
-        v-model="password"
-        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-        :type="show1 ? 'text' : 'password'"
-        label="Password"
-        required
-        @click:append="show1 = !show1"
-      ></v-text-field>
-
-    <v-btn
-        type="submit"
-        color="success"
-        class="mr-4"
+  <b-container fluid>
+    <div id="nav" class="fixed-top">
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/register">Register</router-link>
+    </div>
+    <div>
+    <h1 style="padding:60px">Login</h1>
+    <b-form @submit="login" style="padding:30px">
+       <b-form-group
+        id="input-group-1"
+        label="Username:"
+        label-for="input-1"
       >
-        Login
-      </v-btn>
-    <p v-if="msg">{{ msg }}</p>
-    </v-form>
-  </v-app>
+        <b-form-input
+          id="input-1"
+          v-model="username"
+          type="text"
+          required
+          placeholder="Enter username"
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Password:" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          v-model="password"
+          type="password"
+          required
+          placeholder="Enter password"
+        ></b-form-input>
+      </b-form-group>
 
-  </div>
+    <b-button type="submit" variant="primary">Login</b-button>
+    <p v-if="msg">{{ msg }}</p>
+    </b-form>
+    </div>
+  </b-container>
 </template>
 <script>
 import AuthService from '@/services/AuthService.js';
@@ -47,6 +48,9 @@ export default {
     };
   },
   methods: {
+    created() {
+    //  this.$vuetify.theme.dark = true;
+    },
     async login(event) {
       event.preventDefault();
       try {
@@ -71,3 +75,26 @@ export default {
   }
 };
 </script>
+<style scoped>
+h1 {
+  color: #42b983;
+}
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  height: 40em
+}
+#nav {
+  padding: 30px;
+}
+#nav a {
+  font-weight: bold;
+  color: #3b5168;
+}
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style>

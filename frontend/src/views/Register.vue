@@ -1,41 +1,53 @@
 <template>
-  <div id="app">
-  <v-app id="inspire">
-    <v-form
-      style="padding:50px"
-      @submit="signUp"
-      ref="form"
-    >
-    <h1>Register to Webchat</h1>
-    <v-text-field
-        v-model="realname"
-        label="Real name"
-        required
-      ></v-text-field>
-   <v-text-field
-        v-model="username"
-        label="Username"
-        required
-      ></v-text-field>
-    <v-text-field
-        v-model="password"
-        label="Password"
-        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-        :type="show1 ? 'text' : 'password'"
-        required
-         @click:append="show1 = !show1"
-      ></v-text-field>
-    <v-btn
-        type="submit"
-        color="success"
-        class="mr-4"
+  <b-container fluid>
+    <div id="nav" class="fixed-top">
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/register">Register</router-link>
+    </div>
+    <div>
+    <h1 style="padding:60px">Register</h1>
+    <b-form @submit="signUp" style="padding:30px">
+    <b-form-group
+        id="input-group-1"
+        label="Your name:"
+        label-for="input-1"
       >
-        Register
-      </v-btn>
+        <b-form-input
+          id="input-1"
+          v-model="realname"
+          type="text"
+          required
+          placeholder="Enter your name"
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group
+        id="input-group-2"
+        label="Username:"
+        label-for="input-2"
+      >
+        <b-form-input
+          id="input-2"
+          v-model="username"
+          type="text"
+          required
+          placeholder="Enter username"
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-3" label="Password:" label-for="input-3">
+        <b-form-input
+          id="input-3"
+          v-model="password"
+          type="password"
+          required
+          placeholder="Enter password"
+        ></b-form-input>
+      </b-form-group>
+
+    <b-button type="submit" variant="primary">Register</b-button>
     <p v-if="msg">{{ msg }}</p>
-    </v-form>
-  </v-app>
-  </div>
+    </b-form>
+    </div>
+  </b-container>
 </template>
 <script>
 import AuthService from '@/services/AuthService.js';
@@ -51,6 +63,9 @@ export default {
     };
   },
   methods: {
+    created() {
+    //  this.$vuetify.theme.dark = true;
+    },
     async signUp(event) {
       event.preventDefault();
       try {
@@ -70,3 +85,26 @@ export default {
   }
 };
 </script>
+<style scoped>
+h1 {
+  color: #42b983;
+}
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  height: 40em
+}
+#nav {
+  padding: 30px;
+}
+#nav a {
+  font-weight: bold;
+  color: #3b5168;
+}
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style>

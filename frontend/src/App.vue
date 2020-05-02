@@ -1,19 +1,6 @@
 <template>
   <div id="app">
-    <div v-if="!this.$store.getters.isLoggedIn" id="nav">
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/register">Register</router-link>
-    </div>
-    <div v-if="this.$store.getters.isLoggedIn">
-      <v-btn
-        color="green"
-        class="mr-4"
-        @click="logout"
-      >
-        Logout
-      </v-btn>
-    </div>
-    <router-view class="fill-height" />
+    <router-view />
   </div>
 </template>
 <script>
@@ -30,9 +17,9 @@ export default {
 };
 </script>
 <style>
-body {
-  height: 100%;
-  }
+html, body {
+  overflow: hidden;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -40,15 +27,5 @@ body {
   text-align: center;
   color: #2c3e50;
   height: 40em
-}
-#nav {
-  padding: 30px;
-}
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>
