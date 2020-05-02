@@ -1,17 +1,19 @@
 <template lang="html">
-  <v-flex md8 offset-md2 class="pa-1" @submit.prevent="sendMessage">
-    <v-form style="width:100%">
-    <v-text-field
-      label="Solo"
-      placeholder="Type Your Message"
-      v-model="message"
-      solo
-      ref="message"
-      style="padding-bottom:0px"
+<div>
+    <b-form autocomplete="off" @submit.prevent="sendMessage" style="width:100%">
+      <b-form-group
+      id="input-group-9"
       >
-    </v-text-field>
-    </v-form>
-  </v-flex>
+      <b-form-input
+      id="input-9"
+      v-model="message"
+      type="text"
+      placeholder="Type your message"
+      >
+      </b-form-input>
+      </b-form-group>
+      </b-form>
+      </div>
 </template>
 
 <script>

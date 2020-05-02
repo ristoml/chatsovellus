@@ -6,7 +6,7 @@
     </div>
     <div>
     <h1 style="padding:60px">Register</h1>
-    <b-form @submit="signUp" style="padding:30px">
+    <b-form autocomplete="off" @submit="signUp" style="padding:30px">
     <b-form-group
         id="input-group-1"
         label="Your name:"
