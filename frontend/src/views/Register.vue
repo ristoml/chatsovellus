@@ -5,47 +5,47 @@
       <router-link to="/register">Register</router-link>
     </div>
     <div>
-    <h1 style="padding:60px">Register</h1>
-    <b-form autocomplete="off" @submit="signUp" style="padding:30px">
-    <b-form-group
-        id="input-group-1"
-        label="Your name:"
-        label-for="input-1"
-      >
-        <b-form-input
-          id="input-1"
-          v-model="realname"
-          type="text"
-          required
-          placeholder="Enter your name"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group
-        id="input-group-2"
-        label="Username:"
-        label-for="input-2"
-      >
-        <b-form-input
-          id="input-2"
-          v-model="username"
-          type="text"
-          required
-          placeholder="Enter username"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group id="input-group-3" label="Password:" label-for="input-3">
-        <b-form-input
-          id="input-3"
-          v-model="password"
-          type="password"
-          required
-          placeholder="Enter password"
-        ></b-form-input>
-      </b-form-group>
+      <h1 style="padding:60px">Register</h1>
+      <b-form autocomplete="off" @submit="signUp" style="padding:30px">
+        <b-form-group
+          id="input-group-1"
+          label="Your name:"
+          label-for="input-1"
+        >
+          <b-form-input
+            id="input-1"
+            v-model="realname"
+            type="text"
+            required
+            placeholder="Enter your name"
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="input-group-2"
+          label="Username:"
+          label-for="input-2"
+        >
+          <b-form-input
+            id="input-2"
+            v-model="username"
+            type="text"
+            required
+            placeholder="Enter username"
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group id="input-group-3" label="Password:" label-for="input-3">
+          <b-form-input
+            id="input-3"
+            v-model="password"
+            type="password"
+            required
+            placeholder="Enter password"
+          ></b-form-input>
+        </b-form-group>
 
-    <b-button type="submit" variant="info">Register</b-button>
-    <p v-if="msg">{{ msg }}</p>
-    </b-form>
+        <b-button type="submit" variant="info">Register</b-button>
+        <p v-if="msg">{{ msg }}</p>
+      </b-form>
     </div>
   </b-container>
 </template>

@@ -1,5 +1,5 @@
 <template>
-<div id="app">
+  <div id="app">
     <div class="fixed-top">
       <b-button v-b-toggle.userlist variant="info" style="margin:10px">User list</b-button>
       <b-button @click="logout" variant="dark">Sign out</b-button>
@@ -12,16 +12,16 @@
       </b-sidebar>
     </div>
     <div>
-    <b-container fluid style="padding:50px" ref="container">
-          <b-row v-for="(message, i) in MESSAGES" style="max-width:80%" :key="i">
-              <app-chat-item :message="message"></app-chat-item>
-          </b-row>
+      <b-container fluid style="padding:50px" ref="container">
+        <b-row v-for="(message, i) in MESSAGES" style="max-width:80%" :key="i">
+          <app-chat-item :message="message"></app-chat-item>
+        </b-row>
       </b-container>
     </div>
-        <div class="fixed-bottom">
-          <app-chat-box></app-chat-box>
-        </div>
+    <div class="fixed-bottom">
+      <app-chat-box></app-chat-box>
     </div>
+  </div>
 </template>
 
 <script>

@@ -39,7 +39,6 @@ module.exports = {
     'space-before-blocks': 'error',
     'keyword-spacing': ['error', { 'before': true, 'after': true }],
 
-
     'no-var': 'error',
     'prefer-const': ['error', {
       'destructuring': 'any',
@@ -68,7 +67,14 @@ module.exports = {
     'no-useless-return': 'error',
     'require-await': 'error',
     'no-confusing-arrow': 'error',
-    'object-shorthand': ['error', 'always']
+    'object-shorthand': ['error', 'always'],
+    'vue/html-indent': ['error', 2, {
+      'attribute': 1,
+      'baseIndent': 1,
+      'closeBracket': 0,
+      'alignAttributesVertically': true,
+      'ignores': []
+    }]
   },
 
   overrides: [{

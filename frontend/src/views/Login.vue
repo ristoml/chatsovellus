@@ -5,36 +5,36 @@
       <router-link to="/register">Register</router-link>
     </div>
     <div>
-    <h1 style="padding:60px">Login</h1>
-    <b-form autocomplete="off" @submit="login" style="padding:30px">
-       <b-form-group
-        id="input-group-1"
-        label="Username:"
-        label-for="input-1"
-      >
-        <b-form-input
-          data-cy="username"
-          id="input-1"
-          v-model="username"
-          type="text"
-          required
-          placeholder="Enter username"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group id="input-group-2" label="Password:" label-for="input-2">
-        <b-form-input
-          data-cy="password"
-          id="input-2"
-          v-model="password"
-          type="password"
-          required
-          placeholder="Enter password"
-        ></b-form-input>
-      </b-form-group>
+      <h1 style="padding:60px">Login</h1>
+      <b-form autocomplete="off" @submit="login" style="padding:30px">
+        <b-form-group
+          id="input-group-1"
+          label="Username:"
+          label-for="input-1"
+        >
+          <b-form-input
+            data-cy="username"
+            id="input-1"
+            v-model="username"
+            type="text"
+            required
+            placeholder="Enter username"
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group id="input-group-2" label="Password:" label-for="input-2">
+          <b-form-input
+            data-cy="password"
+            id="input-2"
+            v-model="password"
+            type="password"
+            required
+            placeholder="Enter password"
+          ></b-form-input>
+        </b-form-group>
 
-    <b-button data-cy="loginbutton" type="submit" variant="info">Login</b-button>
-    <p v-if="msg">{{ msg }}</p>
-    </b-form>
+        <b-button data-cy="loginbutton" type="submit" variant="info">Login</b-button>
+        <p v-if="msg">{{ msg }}</p>
+      </b-form>
     </div>
   </b-container>
 </template>
