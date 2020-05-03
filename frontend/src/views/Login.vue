@@ -64,7 +64,6 @@ export default {
         delete user['token'];
         const token = response.token;
         this.$store.dispatch('login', { user, token });
-        this.$socket.client.open();
         this.$router.push('/');
       } catch (error) {
         this.msg = error.response.data.error;

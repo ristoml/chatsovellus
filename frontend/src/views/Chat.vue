@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="app">
     <div class="fixed-top">
       <b-button v-b-toggle.userlist variant="success" style="margin:10px">User list</b-button>
       <b-button @click="logout" variant="danger">Sign out</b-button>
@@ -77,6 +77,8 @@ export default {
   created() {
     if (!this.$store.getters.isLoggedIn) {
       this.$router.push('/login');
+    } else {
+      this.$socket.client.open();
     }
   },
   beforeDestroy() {
@@ -85,3 +87,12 @@ export default {
   }
 };
 </script>
+<style lang='scss'>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+</style>
