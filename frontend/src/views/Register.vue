@@ -43,7 +43,7 @@
         ></b-form-input>
       </b-form-group>
 
-    <b-button type="submit" variant="primary">Register</b-button>
+    <b-button type="submit" variant="info">Register</b-button>
     <p v-if="msg">{{ msg }}</p>
     </b-form>
     </div>
@@ -63,8 +63,6 @@ export default {
     };
   },
   methods: {
-    created() {
-    },
     async signUp(event) {
       event.preventDefault();
       try {
@@ -88,13 +86,7 @@ export default {
 h1 {
   color: #42b983;
 }
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+
 #nav {
   padding: 30px;
 }

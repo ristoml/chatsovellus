@@ -1,8 +1,8 @@
 <template>
 <div id="app">
     <div class="fixed-top">
-      <b-button v-b-toggle.userlist variant="success" style="margin:10px">User list</b-button>
-      <b-button @click="logout" variant="danger">Sign out</b-button>
+      <b-button v-b-toggle.userlist variant="info" style="margin:10px">User list</b-button>
+      <b-button @click="logout" variant="dark">Sign out</b-button>
     </div>
     <div>
       <b-sidebar id="userlist" title="Users in chat" right shadow backdrop>
@@ -12,7 +12,7 @@
       </b-sidebar>
     </div>
     <div>
-    <b-container ref="container" style="padding:60px">
+    <b-container fluid style="padding:50px" ref="container">
           <b-row v-for="(message, i) in MESSAGES" style="max-width:80%" :key="i">
               <app-chat-item :message="message"></app-chat-item>
           </b-row>
@@ -48,8 +48,7 @@ export default {
   },
   updated() {
     var elem = this.$refs.container;
-    console.log(elem.clientHeight);
-    elem.scrollTop = elem.clientHeight;
+    elem.lastChild.scrollIntoView();
   },
   sockets: {
     connect: function() {
@@ -87,7 +86,7 @@ export default {
   }
 };
 </script>
-<style lang='scss'>
+<style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
