@@ -70,6 +70,7 @@
         "no-extra-semi": "error",
         "no-useless-return": "error",
         "require-await": "error",
-        "no-confusing-arrow": "error"
+        "no-confusing-arrow": "error",
+        "object-shorthand": ["error", "always"]
     }
 }
