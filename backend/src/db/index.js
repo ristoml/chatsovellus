@@ -2,6 +2,7 @@
  * Creates a connection pool using node-postgres and provides methods for communicating with the database.
  * @module db */
 const config = require('../utils/config');
+const chalk  = require('chalk');
 
 const Pool = require('pg').Pool;
 const pool = new Pool({
@@ -12,7 +13,11 @@ const pool = new Pool({
   port: 5432
 });
 
-console.log('Pool created. User:', config.DB_USER, ' DB:', config.DB_NAME);
+console.log(
+  chalk.bold.green('[Chat Server]') +
+  ' Pool created. User: ' + config.DB_USER +
+  ' DB: ' + config.DB_NAME
+);
 
 /**
  * Execute an SQL-query.
