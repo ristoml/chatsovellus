@@ -1,30 +1,30 @@
 
 const url = 'http://localhost:8080';
 
-describe('When not logged in', function() {
-  describe('and visiting url paths', function() {
-    it('front page redirects to /login', function() {
+describe('When not logged in', function () {
+  describe('and visiting url paths', function () {
+    it('front page redirects to /login', function () {
       cy.visit(url);
       cy.contains('Login');
     });
 
-    it('login page can be opened', function() {
+    it('login page can be opened', function () {
       cy.visit(`${url}/login`);
       cy.contains('Login');
     });
 
-    it('register page can be opened', function() {
+    it('register page can be opened', function () {
       cy.visit(`${url}/register`);
       cy.contains('Register');
     });
   });
 
-  describe('and navigating the website without being logged in', function() {
-    beforeEach(function() {
+  describe('and navigating the website without being logged in', function () {
+    beforeEach(function () {
       cy.visit(url);
     });
 
-    it('register page can be opened', function() {
+    it('register page can be opened', function () {
       cy.contains('Register')
         .click();
 
@@ -33,15 +33,15 @@ describe('When not logged in', function() {
   });
 });
 
-describe('When trying to log in', function() {
-  beforeEach(function() {
+describe('When trying to log in', function () {
+  beforeEach(function () {
     cy.request('POST', `${url}/api/tests/reset`);
     cy.request('POST', `${url}/api/tests/addtestuser`);
     cy.visit(`${url}/login`);
   });
 
-  describe('with correct username and password', function() {
-    it('user has successfully logged in', function() {
+  describe('with correct username and password', function () {
+    it('user has successfully logged in', function () {
       cy.get('[data-cy=username]')
         .type('root');
       cy.get('[data-cy=password]')
@@ -53,8 +53,8 @@ describe('When trying to log in', function() {
     });
   });
 
-  describe('and user does not exist', function() {
-    it('cannot log in', function() {
+  describe('and user does not exist', function () {
+    it('cannot log in', function () {
       cy.get('[data-cy=username]')
         .type('non-existing user');
       cy.get('[data-cy=password]')
@@ -65,8 +65,8 @@ describe('When trying to log in', function() {
     });
   });
 
-  describe('with an incorrect password', function() {
-    it('cannot log in', function() {
+  describe('with an incorrect password', function () {
+    it('cannot log in', function () {
       cy.get('[data-cy=username]')
         .type('root');
       cy.get('[data-cy=password]')

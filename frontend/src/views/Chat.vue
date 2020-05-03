@@ -47,19 +47,19 @@ export default {
     this.$store.dispatch('SET_USER', this.$store.getters.getUser);
   },
   updated() {
-    var elem = this.$refs.container;
+    const elem = this.$refs.container;
     elem.lastChild.scrollIntoView();
   },
   sockets: {
-    connect: function() {
+    connect() {
       console.log('socket connected');
       this.$socket.client.emit('newUser', this.$store.getters.getUser.username);
     },
-    userList: function(response) {
+    userList(response) {
       console.log('userlist received: '+ response);
       this.$store.dispatch('SET_USERS', response);
     },
-    newMessage: function(data) {
+    newMessage(data) {
       console.log('got new message ', data);
       this.$store.dispatch('ADD_MESSAGE', data);
     }

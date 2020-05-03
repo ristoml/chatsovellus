@@ -19,19 +19,19 @@ export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: getDefaultState(),
   getters: {
-    isLoggedIn: state => {
+    isLoggedIn: (state) => {
       return state.token;
     },
-    getUser: state => {
+    getUser: (state) => {
       return state.user;
     },
-    MESSAGES: state => {
+    MESSAGES: (state) => {
       return state.messages;
     },
-    USER: state => {
+    USER: (state) => {
       return state.user;
     },
-    USERS: state => {
+    USERS: (state) => {
       return state.users;
     }
   },
@@ -48,7 +48,7 @@ export default new Vuex.Store({
     ADD_MESSAGE: (state, payload) => {
       state.messages.push(payload);
     },
-    RESET: state => {
+    RESET: (state) => {
       Object.assign(state, getDefaultState());
     },
     SET_MESSAGES: (state, payload) => {
@@ -63,8 +63,8 @@ export default new Vuex.Store({
     logout: ({ commit }) => {
       commit('RESET', '');
     },
-    SET_MESSAGES: async(context) => {
-      let { data } = await Axios.get('/api/chat/');
+    SET_MESSAGES: async (context) => {
+      const { data } = await Axios.get('/api/chat/');
       context.commit('SET_MESSAGES', data);
     },
     ADD_MESSAGE: (context, payload) => {

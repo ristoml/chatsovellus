@@ -63,7 +63,7 @@ export default {
         this.msg = response.msg;
 
         const user = { ...response };
-        delete user['token'];
+        delete user.token;
         const token = response.token;
         this.$store.dispatch('login', { user, token });
         this.$router.push('/');

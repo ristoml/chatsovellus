@@ -1,19 +1,19 @@
 <template lang="html">
-<div>
+  <div>
     <b-form autocomplete="off" @submit.prevent="sendMessage" style="width:100%">
       <b-form-group
-      id="input-group-9"
+        id="input-group-9"
       >
-      <b-form-input
-      id="input-9"
-      v-model="message"
-      type="text"
-      placeholder="Type your message"
-      >
-      </b-form-input>
+        <b-form-input
+          id="input-9"
+          v-model="message"
+          type="text"
+          placeholder="Type your message"
+        >
+        </b-form-input>
       </b-form-group>
-      </b-form>
-      </div>
+    </b-form>
+  </div>
 </template>
 
 <script>
@@ -26,7 +26,7 @@ export default {
   methods: {
     async sendMessage() {
       if (this.message) {
-        let message = {
+        const message = {
           id: this.$store.getters.getUser.id,
           username: this.$store.getters.getUser.username,
           message: this.message

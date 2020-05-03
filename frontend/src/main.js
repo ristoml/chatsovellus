@@ -23,5 +23,5 @@ new Vue({
   store,
   BootstrapVue,
   IconsPlugin,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount('#app');
