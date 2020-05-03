@@ -30,7 +30,7 @@
         ></b-form-input>
       </b-form-group>
 
-    <b-button type="submit" variant="primary">Login</b-button>
+    <b-button type="submit" variant="info">Login</b-button>
     <p v-if="msg">{{ msg }}</p>
     </b-form>
     </div>
@@ -76,13 +76,6 @@ export default {
 <style scoped>
 h1 {
   color: #42b983;
-}
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 #nav {
   padding: 30px;
