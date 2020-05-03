@@ -157,6 +157,16 @@ describe('When there is initially one user in the database', () => {
     expect(res3.body.error).toMatch(/not a proper user type/i);
   });
 
+  test('user\'s password hash should not be revealed in server response', async () => {
+    const response =
+      await api
+        .get('/api/users')
+        .expect(200)
+        .expect('Content-Type', /application\/json/);
+
+    response.body.forEach((u) => expect(u.passwordhash).not.toBeDefined());
+  });
+
 });
 
 describe('When there are a few users in the database', () => {
@@ -177,6 +187,16 @@ describe('When there are a few users in the database', () => {
   beforeEach(async () => {
     await api.post('/api/tests/resetusers');
     await api.post('/api/tests/addsometestusers');
+  });
+
+  test('user\'s password hash should not be revealed in server response', async () => {
+    const response =
+      await api
+        .get('/api/users')
+        .expect(200)
+        .expect('Content-Type', /application\/json/);
+
+    response.body.forEach((u) => expect(u.passwordhash).not.toBeDefined());
   });
 
   test('user\'s of type admin can delete a user\'s from the database', async () => {

@@ -60,6 +60,7 @@ describe('When a client connect to the server', () => {
     client.on('newMessage', (msg) => {
       expect(msg.username).toBe('You');
       expect(msg.message).toBe('hello world');
+      expect(msg.created).toBeDefined();
       done();
     });
   });
