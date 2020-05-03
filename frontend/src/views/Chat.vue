@@ -12,7 +12,7 @@
       </b-sidebar>
     </div>
     <div>
-    <b-container ref="container" style="overflow:hidden">
+    <b-container ref="container" style="padding:60px">
           <b-row v-for="(message, i) in MESSAGES" style="max-width:80%" :key="i">
               <app-chat-item :message="message"></app-chat-item>
           </b-row>
@@ -78,6 +78,10 @@ export default {
     if (!this.$store.getters.isLoggedIn) {
       this.$router.push('/login');
     }
+  },
+  beforeDestroy() {
+    this.$socket.client.close();
+    console.log('socket closed');
   }
 };
 </script>
