@@ -6,7 +6,7 @@
     </div>
     <div>
       <b-sidebar id="userlist" title="Users in chat" right shadow backdrop>
-        <div v-for="(user, i) in USERS" :key="i" style="padding:60px">
+        <div v-for="(user, i) in USERS" :key="i" style="padding:20px">
           {{ user }}
         </div>
       </b-sidebar>
@@ -54,7 +54,7 @@ export default {
   sockets: {
     connect: function() {
       console.log('socket connected');
-      this.$socket.emit('newUser', this.$store.getters.getUser.username);
+      this.$socket.client.emit('newUser', this.$store.getters.getUser.username);
     },
     userList: function(response) {
       console.log('userlist received: '+ response);
