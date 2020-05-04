@@ -48,7 +48,9 @@ export default {
   },
   updated() {
     const elem = this.$refs.container;
-    elem.lastChild.scrollIntoView();
+    if (elem.lastChild) {
+      elem.lastChild.scrollIntoView();
+    }
   },
   sockets: {
     connect() {
