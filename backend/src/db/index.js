@@ -3,21 +3,34 @@
  * @module db */
 const config = require('../utils/config');
 const chalk  = require('chalk');
+const Pool   = require('pg').Pool;
 
-const Pool = require('pg').Pool;
-const pool = new Pool({
-  user: config.DB_USER,
-  host: 'localhost',
-  database: config.DB_NAME,
-  password: config.DB_PASSWORD,
-  port: 5432
-});
+let options;
 
-console.log(
-  chalk.bold.green('[Chat Server]') +
-  ' Pool created. User: ' + config.DB_USER +
-  ' DB: ' + config.DB_NAME
-);
+if (process.env.NODE_ENV === 'production') {
+  options = {
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
+  };
+} else {
+  options = {
+    user: config.DB_USER,
+    host: 'localhost',
+    database: config.DB_NAME,
+    password: config.DB_PASSWORD,
+    port: 5432
+  };
+}
+
+const pool = new Pool(options);
+
+if (process.env.NODE_ENV !== 'production') {
+  console.log(
+    chalk.bold.green('[Chat Server]') +
+    ' Pool created. User: ' + config.DB_USER +
+    ' DB: ' + config.DB_NAME
+  );
+}
 
 /**
  * Execute an SQL-query.

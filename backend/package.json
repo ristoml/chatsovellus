@@ -11,7 +11,8 @@
         "test": "cross-env jest --verbose --runInBand",
         "test:openhandles": "cross-env jest --verbose --runInBand --detectOpenHandles",
         "jsdoc": "jsdoc -t node_modules/minami -c ./.jsdoc.json .",
-        "lint": "eslint --ext .js ./src"
+        "lint": "eslint --ext .js ./src",
+        "build": "rm -r dist && cd ../frontend && npm run build && mv dist ../backend"
     },
     "author": "",
     "license": "MIT",
