@@ -38,8 +38,12 @@ const init = (server) => {
         Object.values(sockets)
           .map((v) => v.username);
 
-      socket.emit('userList', { joined: 'You', users });
-      socket.broadcast.emit('userList', { joined: username, users });
+      const now = new Date();
+      const youmsg = { username: 'You', created: dateString(now), message: 'joined' };
+      const usrmsg = { username, created: dateString(now), message: 'joined' };
+
+      socket.emit('userList', { message: youmsg, users });
+      socket.broadcast.emit('userList', { message: usrmsg, users });
     });
 
     socket.on('newMessage', async (data) => {
@@ -68,14 +72,16 @@ const init = (server) => {
 
     socket.on('disconnect', () => {
       console.log(`socket ${socket.id} disconnected`);
-      const left = sockets[sockets.id].username;
+      const username = sockets[sockets.id].username;
       delete sockets[socket.id];
 
       const users =
         Object.values(sockets)
           .map((v) => v.username);
 
-      io.emit('userList', { left, users });
+      const now = new Date();
+      const message = { username, created: dateString(now), message: 'joined' };
+      socket.broadcast.emit('userList', { message, users });
     });
   });
 
