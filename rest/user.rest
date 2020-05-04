@@ -1,5 +1,9 @@
 
 ###
+POST http://localhost:3004/api/tests/reset
+
+
+###
 
 GET http://localhost:3004/api/users
 

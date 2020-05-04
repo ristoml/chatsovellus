@@ -6,7 +6,7 @@
     </div>
     <div>
       <b-sidebar id="userlist" title="Users in chat" right shadow backdrop>
-        <div v-for="(user, i) in USERS" :key="i" style="padding:20px">
+        <div v-for="(user, i) in USERS" :key="i" style="padding:5px">
           {{ user }}
         </div>
       </b-sidebar>
