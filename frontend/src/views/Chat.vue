@@ -60,7 +60,9 @@ export default {
     userList(response) {
       console.log('userlist received: '+ response.users);
       this.$store.dispatch('SET_USERS', response.users);
-      this.$store.dispatch('ADD_MESSAGE', response.message);
+      if (response.message.username !== 'You') {
+        this.$store.dispatch('ADD_MESSAGE', response.message);
+      }
     },
     newMessage(data) {
       console.log('got new message ', data);
