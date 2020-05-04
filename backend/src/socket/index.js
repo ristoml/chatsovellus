@@ -38,7 +38,8 @@ const init = (server) => {
         Object.values(sockets)
           .map((v) => v.username);
 
-      io.emit('userList', users);
+      socket.emit('userList', { joined: 'You', users });
+      socket.broadcast.emit('userList', { joined: username, users });
     });
 
     socket.on('newMessage', async (data) => {
@@ -67,13 +68,14 @@ const init = (server) => {
 
     socket.on('disconnect', () => {
       console.log(`socket ${socket.id} disconnected`);
+      const left = sockets[sockets.id].username;
       delete sockets[socket.id];
 
       const users =
         Object.values(sockets)
           .map((v) => v.username);
 
-      io.emit('userList', users);
+      io.emit('userList', { left, users });
     });
   });
 
