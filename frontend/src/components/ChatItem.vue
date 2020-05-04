@@ -2,7 +2,8 @@
   <span slot="activator">
     <p class="grey--text text--darken-2">
       <span>[ {{ message.created.split(' ')[1] }} ] </span>
-      <b class="indigo--text" v-if="message.message==='joined' || message.message==='left'">{{message.username}} </b>
+      <b class="indigo--text" v-if="message.message==='joined'">→ {{message.username}} </b>
+      <b class="indigo--text" v-else-if="message.message==='left'">← {{message.username}} </b>
       <b class="indigo--text" v-else>{{message.username}}: </b>
       {{ message.message }}
     </p>

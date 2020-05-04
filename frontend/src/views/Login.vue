@@ -33,7 +33,7 @@
         </b-form-group>
 
         <b-button data-cy="loginbutton" type="submit" variant="info">Login</b-button>
-        <p v-if="msg">{{ msg }}</p>
+        <p v-if="msg"><br><i>{{ msg }}</i></p>
       </b-form>
     </div>
   </b-container>

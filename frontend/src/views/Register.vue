@@ -44,7 +44,7 @@
         </b-form-group>
 
         <b-button type="submit" variant="info">Register</b-button>
-        <p v-if="msg">{{ msg }}</p>
+        <p v-if="msg"><br><i>{{ msg }}</i></p>
       </b-form>
     </div>
   </b-container>
