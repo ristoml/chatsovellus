@@ -80,7 +80,7 @@ const init = (server) => {
           .map((v) => v.username);
 
       const now = new Date();
-      const message = { username, created: dateString(now), message: 'joined' };
+      const message = { username, created: dateString(now), message: 'left' };
       socket.broadcast.emit('userList', { message, users });
     });
   });
