@@ -58,8 +58,9 @@ export default {
       this.$socket.client.emit('newUser', this.$store.getters.getUser.username);
     },
     userList(response) {
-      console.log('userlist received: '+ response);
-      this.$store.dispatch('SET_USERS', response);
+      console.log('userlist received: '+ response.users);
+      this.$store.dispatch('SET_USERS', response.users);
+      this.$store.dispatch('ADD_MESSAGE', response.message);
     },
     newMessage(data) {
       console.log('got new message ', data);

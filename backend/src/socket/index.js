@@ -72,7 +72,7 @@ const init = (server) => {
 
     socket.on('disconnect', () => {
       console.log(`socket ${socket.id} disconnected`);
-      const username = sockets[sockets.id].username;
+      const username = sockets[socket.id].username;
       delete sockets[socket.id];
 
       const users =

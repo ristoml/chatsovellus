@@ -10,7 +10,7 @@ const getDefaultState = () => {
     token: '',
     user: {},
     users: [],
-    messages: null
+    messages: []
   };
 };
 
