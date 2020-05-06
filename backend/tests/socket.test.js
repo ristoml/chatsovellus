@@ -46,14 +46,15 @@ describe('When a client connect to the server', () => {
   test('a user list is received, when sending username with \'newUser\'-event', async (done) => {
     await client.emit('newUser', 'matti');
 
-    client.on('userList', (users) => {
-      expect(users).toBeDefined();
-      expect(users).toContain('matti');
+    client.on('userList', (data) => {
+      expect(data).toBeDefined();
+      expect(data.users).toContain('matti');
       done();
     });
   });
 
   test('client and server transfer messages between each other', async (done) => {
+    await client.emit('newUser', 'matti');
     const msg = { id, username, message: 'hello world' };
     await client.emit('newMessage', msg);
 
