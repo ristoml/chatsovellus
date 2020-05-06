@@ -3,11 +3,11 @@
     <b-input-group>
 
       <b-input-group-prepend>
-        <b-button variant="info" id="emoji-popover">
+        <b-button data-cy="emojipickerbtn" variant="info" id="emoji-popover">
           😊
         </b-button>
-        <b-popover target="emoji-popover" triggers="hover" placement="top">
-          <b-container class="light-container ">
+        <b-popover data-cy="emojipickerpopover" target="emoji-popover" triggers="hover" placement="top">
+          <b-container data-cy="emojipicker" class="light-container ">
             <template v-for="row in emojiPickerRows">
               <b-row cols="4" :key="row + ''">
                 <b-col v-for="emoji in row" :key="emoji">
@@ -26,6 +26,7 @@
       </b-input-group-prepend>
 
       <b-form-input
+        data-cy="chatmessageinput"
         id="input-9"
         v-model="message"
         type="text"
@@ -80,10 +81,10 @@ export default {
         [' 😉 ', / ;\) /g ]
       ];
       const handEmojis = [
-        ['✌', ':victory_hand:' ],
-        ['☝', ':pointing_hand:'],
-        ['👌', ':ok_hand:'     ],
-        ['👍', ':thumbs_up:'   ]
+        ['✌',  ':victory_hand:' ],
+        ['☝',  ':pointing_hand:'],
+        ['👌', ':ok_hand:'      ],
+        ['👍', ':thumbs_up:'    ]
       ];
 
       let modifiedInput = input.slice();
@@ -110,10 +111,6 @@ export default {
         await this.$socket.client.emit('newMessage', message);
         this.message = '';
       }
-    },
-    logout() {
-      this.$store.dispatch('logout');
-      this.$router.push('/login');
     }
   }
 };

@@ -1,18 +1,32 @@
 <template>
-  <div id="app">
+  <div data-cy="chatpage" id="app">
     <div class="fixed-top">
-      <b-button v-b-toggle.userlist variant="info" style="margin:10px">User list</b-button>
+      <b-button
+        data-cy="userlistbtn"
+        v-b-toggle.userlist
+        variant="info"
+        style="margin: 10px;"
+      >
+        User list
+      </b-button>
       <b-button @click="logout" variant="dark">Sign out</b-button>
     </div>
     <div>
-      <b-sidebar id="userlist" title="Users in chat" right shadow backdrop>
-        <div v-for="(user, i) in USERS" :key="i" style="padding:5px">
+      <b-sidebar
+        data-cy="userlist"
+        id="userlist"
+        title="Users in chat"
+        right
+        shadow
+        backdrop
+      >
+        <div v-for="(user, i) in USERS" :key="i" style="padding: 5px;">
           {{ user }}
         </div>
       </b-sidebar>
     </div>
     <div>
-      <b-container fluid style="padding: 50px;" ref="container">
+      <b-container data-cy="messagesarea" fluid style="padding: 50px;" ref="container">
         <div v-for="(message, i) in MESSAGES" style="max-width: 80%;" :key="i">
           <app-chat-item :message="message"></app-chat-item>
         </div>

@@ -6,7 +6,7 @@
       <router-link to="/register">Register</router-link>
     </div>
 
-    <div>
+    <div data-cy="registerform">
       <h1 style="padding: 60px;">Register</h1>
       <b-form autocomplete="off" @submit="signUp" style="padding: 30px;">
         <b-form-group

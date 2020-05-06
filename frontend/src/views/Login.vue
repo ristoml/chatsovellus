@@ -6,9 +6,9 @@
       <router-link to="/register">Register</router-link>
     </div>
 
-    <div>
-      <h1 style="padding:60px">Login</h1>
-      <b-form autocomplete="off" @submit="login" style="padding:30px">
+    <div data-cy="loginform">
+      <h1 style="padding: 60px;">Login</h1>
+      <b-form autocomplete="off" @submit="login" style="padding: 30px;">
         <b-form-group
           id="input-group-1"
           label="Username:"
