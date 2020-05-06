@@ -11,6 +11,7 @@
     </b-col>
   </b-row>
 </template>
+
 <script>
 export default {
   props: ['message'],

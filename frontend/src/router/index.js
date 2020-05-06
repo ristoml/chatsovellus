@@ -7,21 +7,22 @@ import Register from '../views/Register.vue';
 
 Vue.use(VueRouter);
 
-const routes = [{
-  path: '/',
-  name: 'Chat',
-  component: Chat
-},
-{
-  path: '/login',
-  name: 'Login',
-  component: Login
-},
-{
-  path: '/register',
-  name: 'Register',
-  component: Register
-}
+const routes = [
+  {
+    path: '/',
+    name: 'Chat',
+    component: Chat
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  }
 ];
 
 const router = new VueRouter({

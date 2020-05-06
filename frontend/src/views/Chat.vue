@@ -28,6 +28,7 @@
 import { mapGetters } from 'vuex';
 import chatItem from '../components/ChatItem';
 import chatBox from '../components/ChatBox';
+
 export default {
   components: {
     appChatItem: chatItem,
@@ -87,6 +88,7 @@ export default {
   }
 };
 </script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

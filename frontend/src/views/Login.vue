@@ -1,9 +1,11 @@
 <template>
   <b-container fluid>
+
     <div id="nav" class="fixed-top">
       <router-link to="/login">Login</router-link> |
       <router-link to="/register">Register</router-link>
     </div>
+
     <div>
       <h1 style="padding:60px">Login</h1>
       <b-form autocomplete="off" @submit="login" style="padding:30px">
@@ -36,10 +38,13 @@
         <p v-if="msg"><br><i>{{ msg }}</i></p>
       </b-form>
     </div>
+
   </b-container>
 </template>
+
 <script>
 import AuthService from '@/services/AuthService.js';
+
 export default {
   data() {
     return {
@@ -74,17 +79,21 @@ export default {
   }
 };
 </script>
+
 <style scoped>
 h1 {
   color: #42b983;
 }
+
 #nav {
   padding: 30px;
 }
+
 #nav a {
   font-weight: bold;
   color: #3b5168;
 }
+
 #nav a.router-link-exact-active {
   color: #42b983;
 }
