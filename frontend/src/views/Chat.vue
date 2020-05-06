@@ -54,18 +54,15 @@ export default {
   },
   sockets: {
     connect() {
-      console.log('socket connected');
       this.$socket.client.emit('newUser', this.$store.getters.getUser.username);
     },
     userList(response) {
-      console.log('userlist received: '+ response.users);
       this.$store.dispatch('SET_USERS', response.users);
       if (response.message.username !== 'You') {
         this.$store.dispatch('ADD_MESSAGE', response.message);
       }
     },
     newMessage(data) {
-      console.log('got new message ', data);
       this.$store.dispatch('ADD_MESSAGE', data);
     }
   },
@@ -87,7 +84,6 @@ export default {
   },
   beforeDestroy() {
     this.$socket.client.close();
-    console.log('socket closed');
   }
 };
 </script>
