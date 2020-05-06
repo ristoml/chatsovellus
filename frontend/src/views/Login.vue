@@ -55,8 +55,6 @@ export default {
     };
   },
   methods: {
-    created() {
-    },
     async login(event) {
       event.preventDefault();
       try {

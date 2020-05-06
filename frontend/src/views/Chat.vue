@@ -12,8 +12,8 @@
       </b-sidebar>
     </div>
     <div>
-      <b-container fluid style="padding:50px" ref="container">
-        <div v-for="(message, i) in MESSAGES" style="max-width:80%" :key="i">
+      <b-container fluid style="padding: 50px;" ref="container">
+        <div v-for="(message, i) in MESSAGES" style="max-width: 80%;" :key="i">
           <app-chat-item :message="message"></app-chat-item>
         </div>
       </b-container>
