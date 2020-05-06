@@ -28,8 +28,8 @@ router.post('/adduserandmessages', async (_request, response, next) => {
   try {
     await Promise.all(promiseArray);
     response.status(204).end();
-  } catch (expect) {
-    next(expect);
+  } catch (except) {
+    next(except);
   }
 });
 
@@ -100,8 +100,8 @@ router.post('/addsometestusers', async (_request, response, next) => {
   try {
     await Promise.all(promiseArray);
     response.status(204).end();
-  } catch (expect) {
-    next(expect);
+  } catch (except) {
+    next(except);
   }
 });
 

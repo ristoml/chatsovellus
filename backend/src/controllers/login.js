@@ -26,7 +26,10 @@ router.post('/', async (request, response, next) => {
   try {
     const query =
         await db
-          .query('SELECT id, username, passwordhash, type FROM users WHERE username = $1', [usernameTrimmed]);
+          .query(
+            'SELECT id, username, passwordhash, type FROM users WHERE username = $1',
+            [usernameTrimmed]
+          );
 
     if (query.rows.length === 0) {
       return response.status(404).json({ error: 'User does not exist.' });

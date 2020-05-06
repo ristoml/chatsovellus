@@ -32,12 +32,8 @@ router.get('/:id', async (request, response, next) => {
     if (query.rows.length === 0) {
       response.status(404).json({ error: 'user does not exist' });
     } else {
-      const user = {
-        id: query.rows[0].id,
-        username: query.rows[0].username,
-        realname: query.rows[0].realname,
-        type: query.rows[0].type
-      };
+      const user = { ...query.rows[0] };
+      delete user.passwordhash;
       response.status(200).json(user);
     }
   } catch (except) {
