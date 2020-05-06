@@ -1,61 +1,59 @@
 <template>
-  <div>
-    <b-form autocomplete="off" @submit.prevent="sendMessage">
-      <b-input-group>
-        <b-input-group-prepend>
-          <b-button variant="info" id="emoji-hover">
-            😊
-          </b-button>
-          <b-tooltip variant="light" target="emoji-hover" triggers="hover">
-            <b-table-simple class="light-table">
-              <b-tr>
-                <b-th>
-                  <b-dropdown-item @click="selectEmoji('😂')">😂</b-dropdown-item>
-                  <b-dropdown-item @click="selectEmoji('😃')">😃</b-dropdown-item>
-                  <b-dropdown-item @click="selectEmoji('😠')">😠</b-dropdown-item>
-                  <b-dropdown-item @click="selectEmoji('😉')">😉</b-dropdown-item>
-                </b-th>
-                <b-th>
-                  <b-dropdown-item @click="selectEmoji('😊')">😊</b-dropdown-item>
-                  <b-dropdown-item @click="selectEmoji('😞')">😞</b-dropdown-item>
-                  <b-dropdown-item @click="selectEmoji('😕')">😕</b-dropdown-item>
-                  <b-dropdown-item @click="selectEmoji('😊')">😊</b-dropdown-item>
-                </b-th>
-                <b-th>
-                  <b-dropdown-item @click="selectEmoji('☝')">☝</b-dropdown-item>
-                  <b-dropdown-item @click="selectEmoji('👍')">👍</b-dropdown-item>
-                  <b-dropdown-item @click="selectEmoji('✌')">✌</b-dropdown-item>
-                  <b-dropdown-item @click="selectEmoji('👌')">👌</b-dropdown-item>
-                </b-th>
-              </b-tr>
-              <b-tr>
-              </b-tr>
-            </b-table-simple>
-          </b-tooltip>
-        </b-input-group-prepend>
-        <b-form-input
-          id="input-9"
-          v-model="message"
-          type="text"
-          placeholder="Type your message"
-          @input="handleInput"
-          :maxlength="characterLimit"
-        >
-        </b-form-input>
-        <b-input-group-append>
-          <b-input-group-text>Characters left: {{ characterLimit - message.length }}</b-input-group-text>
-        </b-input-group-append>
-      </b-input-group>
-    </b-form>
-  </div>
+  <b-form autocomplete="off" @submit.prevent="sendMessage">
+    <b-input-group>
+
+      <b-input-group-prepend>
+        <b-button variant="info" id="emoji-popover">
+          😊
+        </b-button>
+        <b-popover target="emoji-popover" triggers="hover" placement="top">
+          <b-container class="light-container ">
+            <template v-for="row in emojiPickerRows">
+              <b-row cols="4" :key="row + ''">
+                <b-col v-for="emoji in row" :key="emoji">
+                  <b-button
+                    variant="outline-light"
+                    class="btn-emoji"
+                    @click="selectEmoji(emoji)"
+                  >
+                    {{ emoji }}
+                  </b-button>
+                </b-col>
+              </b-row>
+            </template>
+          </b-container>
+        </b-popover>
+      </b-input-group-prepend>
+
+      <b-form-input
+        id="input-9"
+        v-model="message"
+        type="text"
+        placeholder="Type your message"
+        @input="handleInput"
+        :maxlength="characterLimit"
+      >
+      </b-form-input>
+
+      <b-input-group-append>
+        <b-input-group-text>{{ characterLimit - message.length }}</b-input-group-text>
+      </b-input-group-append>
+
+    </b-input-group>
+  </b-form>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      characterLimit: 200,
-      message: ''
+      characterLimit: 500,
+      message: '',
+      emojiPickerRows: {
+        row1: ['😂 ', '😃 ', '😞 ', '😕 '],
+        row2: ['😠 ', '😊 ', '😉 ', '✌'],
+        row3: ['☝', '👌', '👍']
+      }
     };
   },
   methods: {
@@ -122,16 +120,18 @@ export default {
 </script>
 
 <style>
-.tooltip {
-  opacity: 1 !important;
-  top: 1;
-}
-.tooltip.in {
-  opacity: 1 !important;
-}
-.light-table {
+.light-container {
   list-style: none;
   background: white;
+}
+
+.btn-emoji:hover {
+  background-color: lightgray !important;
+}
+
+.btn-emoji:focus, .btn-emoji:active {
+  outline: none !important;
+  box-shadow: none !important;
 }
 </style>
 

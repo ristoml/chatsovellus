@@ -13,9 +13,9 @@
     </div>
     <div>
       <b-container fluid style="padding:50px" ref="container">
-        <b-row v-for="(message, i) in MESSAGES" style="max-width:80%" :key="i">
+        <div v-for="(message, i) in MESSAGES" style="max-width:80%" :key="i">
           <app-chat-item :message="message"></app-chat-item>
-        </b-row>
+        </div>
       </b-container>
     </div>
     <div class="fixed-bottom">
