@@ -15,6 +15,7 @@
           label-for="input-1"
         >
           <b-form-input
+            data-cy="yournamefield"
             id="input-1"
             v-model="realname"
             type="text"
@@ -28,6 +29,7 @@
           label-for="input-2"
         >
           <b-form-input
+            data-cy="usernamefield"
             id="input-2"
             v-model="username"
             type="text"
@@ -37,6 +39,7 @@
         </b-form-group>
         <b-form-group id="input-group-3" label="Password:" label-for="input-3">
           <b-form-input
+            data-cy="passwordfield"
             id="input-3"
             v-model="password"
             type="password"
@@ -45,7 +48,7 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-button type="submit" variant="info">Register</b-button>
+        <b-button data-cy="registerbutton" type="submit" variant="info">Register</b-button>
         <p v-if="msg"><br><i>{{ msg }}</i></p>
       </b-form>
     </div>

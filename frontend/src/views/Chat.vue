@@ -9,7 +9,13 @@
       >
         User list
       </b-button>
-      <b-button @click="logout" variant="dark">Sign out</b-button>
+      <b-button
+        data-cy="logoutbutton"
+        @click="logout"
+        variant="dark"
+      >
+        Sign out
+      </b-button>
     </div>
     <div>
       <b-sidebar
