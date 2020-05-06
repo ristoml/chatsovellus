@@ -1,13 +1,13 @@
 <template lang="html">
   <b-row class="message-row">
     <b-col cols="2" md="1">
-      <span class="created">[{{ message.created.split(' ')[1] }}] </span>
-      <b v-if="message.message==='joined'">→ {{message.username}} </b>
-      <b v-else-if="message.message==='left'">← {{message.username}} </b>
+      <span class="created">[{{ message.created.split(' ')[1] }}] </span><br>
+      <b v-if="message.message==='joined' || message.message==='left'"></b>
       <b v-else>{{message.username}}: </b>
     </b-col>
     <b-col cols="12" md="11" class="message text-left">
-      <span class="msg">{{ message.message }}</span>
+      <span v-if="message.message==='joined' || message.message==='left'" class="msg"><b><i>{{message.username}} {{ message.message }}</i></b></span>
+      <span v-else class="msg">{{ message.message }}</span>
     </b-col>
   </b-row>
 </template>
