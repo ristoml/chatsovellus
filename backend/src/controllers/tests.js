@@ -3,6 +3,11 @@ const db     = require('../db');
 const router = require('express').Router();
 const { dateForDb } = require('../utils/helpers');
 
+router.get('/users', async (_request, response) => {
+  const res = await db.query('SELECT * FROM users');
+  response.status(200).json(res.rows);
+});
+
 router.post('/adduserandmessages', async (_request, response, next) => {
   const testPass = 'secret';
   const saltRounds = 10;
